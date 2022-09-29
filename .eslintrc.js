@@ -17,6 +17,20 @@ module.exports = {
 	extends: ['plugin:@typescript-eslint/recommended', 'plugin:import/typescript', 'airbnb', 'airbnb/hooks', 'prettier'],
 	rules: {
 		'react/jsx-filename-extension': ['error', { extensions: ['.tsx', '.ts', 'js', 'jsx'] }],
+		'react/destructuring-assignment': 'off',
+		'react/react-in-jsx-scope': 'off',
+		'react/no-unused-prop-types': 'off',
+		'react/prop-types': 'off',
+		'react/require-default-props': 'warn',
+		'react/function-component-definition': 'off',
+		'react/no-children-prop': 'warn',
+		'react/jsx-props-no-spreading': 'warn',
+		'react/no-array-index-key': 'warn',
+		'react/jsx-no-useless-fragment': 'warn',
+		'react/no-unstable-nested-components': 'warn',
+		'react-hooks/exhaustive-deps': 'warn',
+		'react/default-props-match-prop-types': 'warn',
+
 		'import/extensions': [
 			'error',
 			'ignorePackages',
@@ -32,6 +46,7 @@ module.exports = {
 		'import/no-named-default': 'warn',
 		'import/no-cycle': 'warn',
 		'import/prefer-default-export': 'off',
+		
 		'prettier/prettier': ['error'],
 		'arrow-body-style': 'off',
 		'prefer-arrow-callback': 'off',
