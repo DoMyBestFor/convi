@@ -13,7 +13,7 @@ module.exports = {
 			jsx: true,
 		},
 	},
-	plugins: ['@typescript-eslint', 'react', 'jsx-a11y', 'import', 'react-hooks', 'prettier'],
+	plugins: ['@typescript-eslint', 'react', 'tailwindcss', 'jsx-a11y', 'import', 'react-hooks', 'prettier'],
 	extends: ['plugin:@typescript-eslint/recommended', 'plugin:import/typescript', 'airbnb', 'airbnb/hooks', 'prettier'],
 	rules: {
 		'react/jsx-filename-extension': ['error', { extensions: ['.tsx', '.ts', 'js', 'jsx'] }],
@@ -46,10 +46,12 @@ module.exports = {
 		'import/no-named-default': 'warn',
 		'import/no-cycle': 'warn',
 		'import/prefer-default-export': 'off',
-		
+
 		'prettier/prettier': ['error'],
 		'arrow-body-style': 'off',
 		'prefer-arrow-callback': 'off',
+
+		'tailwindcss/classnames-order': 'error',
 	},
 	settings: {
 		'import/resolver': {
