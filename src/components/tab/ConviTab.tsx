@@ -1,25 +1,29 @@
-import { AiFillPlusCircle } from 'react-icons/ai';
-import React, { HTMLAttributes, SetStateAction, useRef, useState } from 'react';
+import { AiOutlinePlus } from 'react-icons/ai';
+import tw from 'twin.macro';
+import styled from 'styled-components';
+import React, { HTMLAttributes } from 'react';
 import { ConviTabHeaderElement } from './ConviTabHeaderElement';
-import { ConviTabElement, ConviTabElementProps } from './ConviTabElement';
-import { ConviTabHeaderStyle } from '../style/tab/ConviTabHeaderStyle';
-import { ConviTabStyle } from '../style/tab/ConviTabStyle';
+import { ConviTabElementProps } from './ConviTabElement';
+import { ConviTabHeaderStyle } from '../../style/tab/ConviTabHeaderStyle';
+import { ConviTabStyle } from '../../style/tab/ConviTabStyle';
+
+const ConviTabPlusButton = styled(AiOutlinePlus)`
+	${tw`mt-auto mb-1 cursor-pointer hover:text-gray-500`}
+`;
 
 interface ConviTabProps extends HTMLAttributes<HTMLDivElement> {
 	selected: number;
 	children: React.ReactElement<ConviTabElementProps>[];
-	setElements: any;
 	onClose: (id: number) => void;
-	add?: React.ReactElement<ConviTabElementProps>;
+	onAdd?: () => void;
 	onSelected: (id: number) => void;
 }
 
 export const ConviTab: React.FC<ConviTabProps> = props => {
-	const [tabElements, setTabElements] = useState<React.ReactElement<ConviTabElementProps>[]>(props.children);
 	return (
 		<ConviTabStyle>
 			<ConviTabHeaderStyle>
-				{tabElements.map((child: React.ReactElement<ConviTabElementProps>, tabIndex: number) => (
+				{props.children.map((child: React.ReactElement<ConviTabElementProps>, tabIndex: number) => (
 					<ConviTabHeaderElement
 						selected={props.selected === tabIndex}
 						fixed={child.props.fixed}
@@ -33,33 +37,7 @@ export const ConviTab: React.FC<ConviTabProps> = props => {
 					</ConviTabHeaderElement>
 				))}
 
-				{props.add && (
-					<AiFillPlusCircle
-						className="mt-auto mb-1 cursor-pointer"
-						onClick={() => {
-							props.setElements((prevTabElements: any) => {
-								props.onSelected(prevTabElements.length);
-								return [
-									...props.children,
-									<ConviTabElement
-										title={`Untitled-${
-											props.children
-												.filter(element => {
-													// eslint-disable-next-line prefer-regex-literals
-													const regex = new RegExp(/Untitled-[0-9]+/g);
-													return regex.test(element.props.title);
-												})
-												.map(element => Number(element.props.title.split('-')[1]))
-												.reduce((prev: number, cur: number) => Math.max(prev, cur), -1) + 1
-										}`}
-									>
-										<div>{props.add!}</div>
-									</ConviTabElement>,
-								];
-							});
-						}}
-					/>
-				)}
+				{props.onAdd && <ConviTabPlusButton onClick={() => props.onAdd!()} />}
 			</ConviTabHeaderStyle>
 
 			{props.children[props.selected]}
