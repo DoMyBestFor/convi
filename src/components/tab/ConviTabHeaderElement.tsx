@@ -13,12 +13,13 @@ const ConviTabCloseButton = styled(AiOutlineClose)`
 interface ConviTabHeaderElementProps {
 	children: string;
 	selected: boolean;
+	ableChangeTitle?: boolean;
 	fixed?: boolean;
 	onClick: () => void;
 	onClose: () => void;
 }
 
-const useTabTitles = (title: string, onSelect: () => void) => {
+const useTabTitles = (title: string, onSelect: () => void, ableChangeTitle?: boolean) => {
 	const [editMode, setEditMode] = useState<boolean>(false);
 	const [tabTitle, setTabTitle] = useState<string>(title);
 
@@ -27,26 +28,27 @@ const useTabTitles = (title: string, onSelect: () => void) => {
 	}, [title]);
 
 	return {
-		titleContent: !editMode ? (
-			<ConviTabHeaderTitleStyle onClick={() => onSelect()} onDoubleClick={() => setEditMode(true)}>
-				{tabTitle}
-			</ConviTabHeaderTitleStyle>
-		) : (
-			<ConviTabHeaderEditTitleStyle
-				value={tabTitle}
-				autoFocus
-				onChange={(e: any) => setTabTitle(e.target.value)}
-				onBlur={() => setEditMode(false)}
-				onKeyDown={(e: any) => {
-					if (e.key === 'Enter') setEditMode(false);
-				}}
-			/>
-		),
+		titleContent:
+			!editMode || !ableChangeTitle ? (
+				<ConviTabHeaderTitleStyle onClick={() => onSelect()} onDoubleClick={() => setEditMode(true)}>
+					{tabTitle}
+				</ConviTabHeaderTitleStyle>
+			) : (
+				<ConviTabHeaderEditTitleStyle
+					value={tabTitle}
+					autoFocus
+					onChange={(e: any) => setTabTitle(e.target.value)}
+					onBlur={() => setEditMode(false)}
+					onKeyDown={(e: any) => {
+						if (e.key === 'Enter') setEditMode(false);
+					}}
+				/>
+			),
 	};
 };
 
 export const ConviTabHeaderElement: React.FC<ConviTabHeaderElementProps> = props => {
-	const { titleContent } = useTabTitles(props.children, props.onClick);
+	const { titleContent } = useTabTitles(props.children, props.onClick, props.ableChangeTitle);
 	const [displayCloseButton, setDisplayCloseButton] = useState<boolean>(false);
 
 	return (
