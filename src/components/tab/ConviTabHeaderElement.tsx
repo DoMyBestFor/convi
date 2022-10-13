@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import styled from 'styled-components';
 import tw from 'twin.macro';
-import { ConviTabHeaderEditTitleStyle } from '../style/tab/ConviTabHeaderEditTitleStyle';
-import { ConviTabHeaderElementStyle } from '../style/tab/ConviTabHeaderElementStyle';
-import { ConviTabHeaderTitleStyle } from '../style/tab/ConviTabHeaderTitleStyle';
+import { ConviTabHeaderEditTitleStyle } from '../../style/tab/ConviTabHeaderEditTitleStyle';
+import { ConviTabHeaderElementStyle } from '../../style/tab/ConviTabHeaderElementStyle';
+import { ConviTabHeaderTitleStyle } from '../../style/tab/ConviTabHeaderTitleStyle';
 
 const ConviTabCloseButton = styled(AiOutlineClose)`
 	${tw`ml-auto mb-auto mt-auto hover:text-red-500`}
@@ -18,7 +18,7 @@ interface ConviTabHeaderElementProps {
 	onClose: () => void;
 }
 
-const useTabTitles = (title: string, fixed: boolean | undefined, onSelect: () => void) => {
+const useTabTitles = (title: string, onSelect: () => void) => {
 	const [editMode, setEditMode] = useState<boolean>(false);
 	const [tabTitle, setTabTitle] = useState<string>(title);
 
@@ -28,7 +28,7 @@ const useTabTitles = (title: string, fixed: boolean | undefined, onSelect: () =>
 
 	return {
 		titleContent: !editMode ? (
-			<ConviTabHeaderTitleStyle onClick={() => onSelect()} fixed={fixed} onDoubleClick={() => setEditMode(true)}>
+			<ConviTabHeaderTitleStyle onClick={() => onSelect()} onDoubleClick={() => setEditMode(true)}>
 				{tabTitle}
 			</ConviTabHeaderTitleStyle>
 		) : (
@@ -46,12 +46,22 @@ const useTabTitles = (title: string, fixed: boolean | undefined, onSelect: () =>
 };
 
 export const ConviTabHeaderElement: React.FC<ConviTabHeaderElementProps> = props => {
-	const { titleContent } = useTabTitles(props.children, props.fixed, props.onClick);
+	const { titleContent } = useTabTitles(props.children, props.onClick);
+	const [displayCloseButton, setDisplayCloseButton] = useState<boolean>(false);
 
 	return (
-		<ConviTabHeaderElementStyle selected={props.selected}>
+		<ConviTabHeaderElementStyle
+			onMouseOver={() => setDisplayCloseButton(true)}
+			onMouseOut={() => setDisplayCloseButton(false)}
+			selected={props.selected}
+		>
 			{titleContent}
-			{props.fixed || <ConviTabCloseButton onClick={() => props.onClose()} />}
+			{props.fixed || (
+				<ConviTabCloseButton
+					className={`${displayCloseButton ? 'visible' : 'invisible'}`}
+					onClick={() => props.onClose()}
+				/>
+			)}
 		</ConviTabHeaderElementStyle>
 	);
 };
