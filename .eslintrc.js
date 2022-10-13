@@ -16,6 +16,8 @@ module.exports = {
 	plugins: ['@typescript-eslint', 'react', 'tailwindcss', 'jsx-a11y', 'import', 'react-hooks', 'prettier'],
 	extends: ['plugin:@typescript-eslint/recommended', 'plugin:import/typescript', 'airbnb', 'airbnb/hooks', 'prettier'],
 	rules: {
+		'no-unused-vars': 'warn',
+
 		'react/jsx-filename-extension': ['error', { extensions: ['.tsx', '.ts', 'js', 'jsx'] }],
 		'react/destructuring-assignment': 'off',
 		'react/react-in-jsx-scope': 'off',
