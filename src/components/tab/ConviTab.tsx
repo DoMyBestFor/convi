@@ -4,7 +4,7 @@ import { ConviTabElement, ConviTabElementProps } from './ConviTabElement';
 import { ConviTabHeaderStyle } from '../../style/tab/ConviTabHeaderStyle';
 import { ConviTabStyle } from '../../style/tab/ConviTabStyle';
 import { ConviTabPlusButton } from './ConviTabPlusButton';
-import { swapArrayElement } from './Utils';
+import { swapArrayElement } from '../../utils/Util';
 
 // Type
 interface ConviTabProps extends HTMLAttributes<HTMLDivElement> {
