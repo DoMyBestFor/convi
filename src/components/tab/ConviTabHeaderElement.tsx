@@ -1,25 +1,27 @@
-import React, { useEffect, useState } from 'react';
-import { AiOutlineClose } from 'react-icons/ai';
-import styled from 'styled-components';
-import tw from 'twin.macro';
+import React, { forwardRef, HTMLAttributes, useEffect, useState } from 'react';
 import { ConviTabHeaderEditTitleStyle } from '../../style/tab/ConviTabHeaderEditTitleStyle';
 import { ConviTabHeaderElementStyle } from '../../style/tab/ConviTabHeaderElementStyle';
 import { ConviTabHeaderTitleStyle } from '../../style/tab/ConviTabHeaderTitleStyle';
+import { ConviTabCloseButton } from './ConviTabCloseButton';
 
-const ConviTabCloseButton = styled(AiOutlineClose)`
-	${tw`ml-auto mb-auto mt-auto hover:text-red-500`}
-`;
-
-interface ConviTabHeaderElementProps {
+// Types
+export interface ConviTabHeaderElementProps extends HTMLAttributes<HTMLSpanElement> {
 	children: string;
 	selected: boolean;
+	index: number;
+	// eslint-disable-next-line no-unused-vars
+	onTabTitleChange: (newTitle: string) => void;
+	draggableTab?: boolean;
 	ableChangeTitle?: boolean;
 	fixed?: boolean;
-	onClick: () => void;
+	// eslint-disable-next-line no-unused-vars
+	onSelected: (index: number) => void;
 	onClose: () => void;
 }
 
-const useTabTitles = (title: string, onSelect: () => void, ableChangeTitle?: boolean) => {
+// Custom Hooks
+// eslint-disable-next-line no-unused-vars
+const useTabTitles = (title: string, onTabTitleChange: (newTitle: string) => void, ableChangeTitle?: boolean) => {
 	const [editMode, setEditMode] = useState<boolean>(false);
 	const [tabTitle, setTabTitle] = useState<string>(title);
 
@@ -27,43 +29,80 @@ const useTabTitles = (title: string, onSelect: () => void, ableChangeTitle?: boo
 		setTabTitle(title);
 	}, [title]);
 
+	const handleDoubleClick = () => setEditMode(true);
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => setTabTitle(e.target.value);
+
 	return {
-		titleContent:
-			!editMode || !ableChangeTitle ? (
-				<ConviTabHeaderTitleStyle onClick={() => onSelect()} onDoubleClick={() => setEditMode(true)}>
-					{tabTitle}
-				</ConviTabHeaderTitleStyle>
-			) : (
+		titleContent: () =>
+			editMode && ableChangeTitle ? (
 				<ConviTabHeaderEditTitleStyle
 					value={tabTitle}
 					autoFocus
-					onChange={(e: any) => setTabTitle(e.target.value)}
-					onBlur={() => setEditMode(false)}
-					onKeyDown={(e: any) => {
-						if (e.key === 'Enter') setEditMode(false);
+					onChange={handleChange}
+					onBlur={e => {
+						onTabTitleChange(e.target.value);
+						setEditMode(false);
+					}}
+					onKeyDown={e => {
+						if (e.key === 'Enter') {
+							onTabTitleChange(e.currentTarget.value);
+							setEditMode(false);
+						}
 					}}
 				/>
+			) : (
+				<ConviTabHeaderTitleStyle onDoubleClick={handleDoubleClick}>{tabTitle}</ConviTabHeaderTitleStyle>
 			),
 	};
 };
 
-export const ConviTabHeaderElement: React.FC<ConviTabHeaderElementProps> = props => {
-	const { titleContent } = useTabTitles(props.children, props.onClick, props.ableChangeTitle);
+export const ConviTabHeaderElement = forwardRef<
+	React.ReactElement<ConviTabHeaderElementProps>,
+	ConviTabHeaderElementProps
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+>((props: ConviTabHeaderElementProps, ref: any) => {
+	const {
+		children,
+		onSelected,
+		index,
+		selected,
+		onTabTitleChange,
+		fixed,
+		onClose,
+		ableChangeTitle,
+		draggableTab,
+		...spanProps
+	} = props;
+
 	const [displayCloseButton, setDisplayCloseButton] = useState<boolean>(false);
+	const { titleContent } = useTabTitles(children, onTabTitleChange, ableChangeTitle);
+
+	const handleClick = () => onSelected(index);
+	const handleClose = () => onClose();
+	const handleMouseOver = () => setDisplayCloseButton(true);
+	const handleMouseOut = () => setDisplayCloseButton(false);
 
 	return (
 		<ConviTabHeaderElementStyle
-			onMouseOver={() => setDisplayCloseButton(true)}
-			onMouseOut={() => setDisplayCloseButton(false)}
-			selected={props.selected}
+			{...spanProps}
+			ref={ref}
+			draggable={draggableTab}
+			selected={selected}
+			onClick={handleClick}
+			onMouseOver={handleMouseOver}
+			onMouseOut={handleMouseOut}
 		>
-			{titleContent}
-			{props.fixed || (
-				<ConviTabCloseButton
-					className={`${displayCloseButton ? 'visible' : 'invisible'}`}
-					onClick={() => props.onClose()}
-				/>
+			{titleContent()}
+			{fixed || (
+				<ConviTabCloseButton className={`${displayCloseButton ? 'visible' : 'invisible'}`} onClick={handleClose} />
 			)}
 		</ConviTabHeaderElementStyle>
 	);
+});
+
+// Default Props
+ConviTabHeaderElement.defaultProps = {
+	draggableTab: true,
+	ableChangeTitle: false,
+	fixed: false,
 };
