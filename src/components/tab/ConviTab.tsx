@@ -136,7 +136,7 @@ export const ConviTab: React.FC<ConviTabProps> = props => {
 					</ConviTabHeaderElement>
 				))}
 
-				{props.onAdd && (
+				{props.onAdd && props.defaultIndex === undefined && (
 					<ConviTabPlusButton
 						onClick={() => {
 							props.onAdd?.();
