@@ -23,10 +23,10 @@ module.exports = {
 		'react/react-in-jsx-scope': 'off',
 		'react/no-unused-prop-types': 'off',
 		'react/prop-types': 'off',
-		'react/require-default-props': 'warn',
+		'react/require-default-props': 'off',
 		'react/function-component-definition': 'off',
 		'react/no-children-prop': 'warn',
-		'react/jsx-props-no-spreading': 'warn',
+		'react/jsx-props-no-spreading': 'off',
 		'react/no-array-index-key': 'warn',
 		'react/jsx-no-useless-fragment': 'warn',
 		'react/no-unstable-nested-components': 'warn',
@@ -49,7 +49,7 @@ module.exports = {
 		'import/no-cycle': 'warn',
 		'import/prefer-default-export': 'off',
 
-		'prettier/prettier': ['error'],
+		'prettier/prettier': ['error', { endOfLine: 'auto' }],
 		'arrow-body-style': 'off',
 		'prefer-arrow-callback': 'off',
 
