@@ -1,15 +1,9 @@
 import React, { ReactNode } from 'react';
-import styled from 'styled-components';
-import tw from 'twin.macro';
-import { AiOutlineClose } from 'react-icons/ai';
 import { ConviModalBackdropStyle } from '../../style/modal/ConviModalBackdropStyle';
 import { ConviModalContentStyle } from '../../style/modal/ConviModalContentStyle';
 import { ConviModalStyle } from '../../style/modal/ConviModalStyle';
 import { ConviModalTitlebar } from '../../style/modal/ConviModalTitlebar';
-
-const ConviModalCloseButton = styled(AiOutlineClose)`
-	${tw`ml-auto mb-auto mt-auto cursor-pointer hover:text-red-500`}
-`;
+import { ConviModalCloseButton } from './ConviModalCloseButton';
 
 interface ConviModalProps {
 	open: boolean; // modal open state
