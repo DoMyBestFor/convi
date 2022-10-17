@@ -7,7 +7,7 @@ export interface ConviTabElementProps extends HTMLAttributes<HTMLDivElement> {
 	children: React.ReactElement;
 }
 
-export const ConviTabElement: React.FC<ConviTabElementProps> = props => {
+const ConviTabElement: React.FC<ConviTabElementProps> = props => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const { title, fixed, children, ...divProps } = props;
 	// eslint-disable-next-line react/jsx-props-no-spreading
@@ -17,3 +17,5 @@ export const ConviTabElement: React.FC<ConviTabElementProps> = props => {
 ConviTabElement.defaultProps = {
 	fixed: false,
 };
+
+export default ConviTabElement;

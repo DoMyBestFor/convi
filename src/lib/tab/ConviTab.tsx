@@ -1,10 +1,10 @@
 import React, { HTMLAttributes, useEffect, useRef } from 'react';
 import { ConviTabHeaderElement } from './ConviTabHeaderElement';
-import { ConviTabElement, ConviTabElementProps } from './ConviTabElement';
-import { ConviTabHeaderStyle } from '../../style/tab/ConviTabHeaderStyle';
-import { ConviTabStyle } from '../../style/tab/ConviTabStyle';
+import ConviTabElement, { ConviTabElementProps } from './ConviTabElement';
+import { ConviTabHeaderStyle } from '../style/tab/ConviTabHeaderStyle';
+import { ConviTabStyle } from '../style/tab/ConviTabStyle';
+import { swapArrayElement } from '../utils/Util';
 import { ConviTabPlusButton } from './ConviTabPlusButton';
-import { swapArrayElement } from '../../utils/Util';
 
 // Type
 interface ConviTabProps extends HTMLAttributes<HTMLDivElement> {
@@ -25,7 +25,7 @@ interface ElementPosition {
 	moved?: number;
 }
 
-export const ConviTab: React.FC<ConviTabProps> = props => {
+const ConviTab: React.FC<ConviTabProps> = props => {
 	const {
 		selected,
 		ableChangeTitle,
@@ -163,3 +163,5 @@ ConviTab.defaultProps = {
 	forceRender: false,
 	draggableTab: true,
 };
+
+export default ConviTab;

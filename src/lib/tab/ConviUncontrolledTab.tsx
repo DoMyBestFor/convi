@@ -1,8 +1,8 @@
 import React, { HTMLAttributes, useState } from 'react';
 import { ConviTabHeaderElement } from './ConviTabHeaderElement';
 import { ConviTabElementProps } from './ConviTabElement';
-import { ConviTabHeaderStyle } from '../../style/tab/ConviTabHeaderStyle';
-import { ConviTabStyle } from '../../style/tab/ConviTabStyle';
+import { ConviTabHeaderStyle } from '../style/tab/ConviTabHeaderStyle';
+import { ConviTabStyle } from '../style/tab/ConviTabStyle';
 
 // Type
 interface ConviUncontrolledTabProps extends HTMLAttributes<HTMLDivElement> {
@@ -11,7 +11,7 @@ interface ConviUncontrolledTabProps extends HTMLAttributes<HTMLDivElement> {
 	children: React.ReactElement<ConviTabElementProps>[];
 }
 
-export const ConviUncontrolledTab: React.FC<ConviUncontrolledTabProps> = props => {
+const ConviUncontrolledTab: React.FC<ConviUncontrolledTabProps> = props => {
 	const { defaultIndex, forceRender, children, ...divProps } = props;
 	const [selected, setSelected] = useState<number>(defaultIndex);
 
@@ -49,3 +49,5 @@ export const ConviUncontrolledTab: React.FC<ConviUncontrolledTabProps> = props =
 ConviUncontrolledTab.defaultProps = {
 	forceRender: false,
 };
+
+export default ConviUncontrolledTab;

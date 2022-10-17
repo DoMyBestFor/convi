@@ -1,8 +1,8 @@
 import React, { ReactNode } from 'react';
-import { ConviModalBackdropStyle } from '../../style/modal/ConviModalBackdropStyle';
-import { ConviModalContentStyle } from '../../style/modal/ConviModalContentStyle';
-import { ConviModalStyle } from '../../style/modal/ConviModalStyle';
-import { ConviModalTitlebar } from '../../style/modal/ConviModalTitlebar';
+import { ConviModalBackdropStyle } from '../style/modal/ConviModalBackdropStyle';
+import { ConviModalContentStyle } from '../style/modal/ConviModalContentStyle';
+import { ConviModalStyle } from '../style/modal/ConviModalStyle';
+import { ConviModalTitlebar } from '../style/modal/ConviModalTitlebar';
 import { ConviModalCloseButton } from './ConviModalCloseButton';
 
 interface ConviModalProps {
@@ -13,7 +13,7 @@ interface ConviModalProps {
 	title?: ReactNode; // modal title
 }
 
-export const ConviModal: React.FC<ConviModalProps> = props => {
+const ConviModal: React.FC<ConviModalProps> = props => {
 	const { open, onClose, title, children, preventBackdropClick } = props;
 	return (
 		<ConviModalStyle open={open}>
@@ -36,3 +36,5 @@ ConviModal.defaultProps = {
 	preventBackdropClick: false,
 	title: 'Modal',
 };
+
+export default ConviModal;

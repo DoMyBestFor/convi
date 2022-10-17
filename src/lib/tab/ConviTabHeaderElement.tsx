@@ -1,7 +1,7 @@
 import React, { forwardRef, HTMLAttributes, useEffect, useState } from 'react';
-import { ConviTabHeaderEditTitleStyle } from '../../style/tab/ConviTabHeaderEditTitleStyle';
-import { ConviTabHeaderElementStyle } from '../../style/tab/ConviTabHeaderElementStyle';
-import { ConviTabHeaderTitleStyle } from '../../style/tab/ConviTabHeaderTitleStyle';
+import { ConviTabHeaderEditTitleStyle } from '../style/tab/ConviTabHeaderEditTitleStyle';
+import { ConviTabHeaderElementStyle } from '../style/tab/ConviTabHeaderElementStyle';
+import { ConviTabHeaderTitleStyle } from '../style/tab/ConviTabHeaderTitleStyle';
 import { ConviTabCloseButton } from './ConviTabCloseButton';
 
 // Types
