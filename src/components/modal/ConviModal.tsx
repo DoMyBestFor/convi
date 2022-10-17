@@ -9,22 +9,23 @@ interface ConviModalProps {
 	open: boolean; // modal open state
 	onClose: () => void; // close modal
 	preventBackdropClick?: boolean; // prevent click event for backdrop
-	children?: ReactNode; // children
+	children: ReactNode; // children
 	title?: ReactNode; // modal title
 }
 
 export const ConviModal: React.FC<ConviModalProps> = props => {
+	const { open, onClose, title, children, preventBackdropClick } = props;
 	return (
-		<ConviModalStyle open={props.open}>
-			<ConviModalBackdropStyle onMouseDown={() => !props.preventBackdropClick && props.onClose()} />
+		<ConviModalStyle open={open}>
+			<ConviModalBackdropStyle onMouseDown={() => !preventBackdropClick && onClose()} />
 			<ConviModalContentStyle>
-				{props.title && (
+				{title && (
 					<ConviModalTitlebar>
-						{props.title}
-						<ConviModalCloseButton onClick={() => props.onClose()} />
+						{title}
+						<ConviModalCloseButton onClick={() => onClose()} />
 					</ConviModalTitlebar>
 				)}
-				{props.children}
+				{children}
 			</ConviModalContentStyle>
 		</ConviModalStyle>
 	);
@@ -33,4 +34,5 @@ export const ConviModal: React.FC<ConviModalProps> = props => {
 // default props
 ConviModal.defaultProps = {
 	preventBackdropClick: false,
+	title: 'Modal',
 };
