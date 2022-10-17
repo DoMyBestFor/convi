@@ -1,8 +1,14 @@
 import styled from 'styled-components';
-import tw from 'twin.macro';
 
 export const ConviModalContentStyle = styled.div`
-	${tw`pl-2.5 pr-2.5 pt-1.5 pb-1.5 z-20 bg-white rounded-tl border-solid border-2 border-b-gray-50`}
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	z-index: 20;
+	background-color: white;
+	border-radius: 50px;
+	border: solid 3px gray;
 	max-width: 80%;
 	max-height: 80%;
 	min-width: 30%;
