@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, useEffect, useRef, useState } from 'react';
+import React, { HTMLAttributes, useEffect, useRef } from 'react';
 import { ConviTabHeaderElement } from './ConviTabHeaderElement';
 import { ConviTabElement, ConviTabElementProps } from './ConviTabElement';
 import { ConviTabHeaderStyle } from '../../style/tab/ConviTabHeaderStyle';
@@ -8,19 +8,15 @@ import { swapArrayElement } from '../../utils/Util';
 
 // Type
 interface ConviTabProps extends HTMLAttributes<HTMLDivElement> {
-	defaultIndex?: number;
-	selected?: number;
+	selected: number;
 	ableChangeTitle?: boolean;
 	forceRender?: boolean;
 	draggableTab?: boolean;
 	children: React.ReactElement<ConviTabElementProps>[];
-	// eslint-disable-next-line no-unused-vars
 	onClose: (index: number) => void;
-	// eslint-disable-next-line no-unused-vars
 	onTabPositionChange: (currentTabs: React.ReactElement<ConviTabElementProps>[]) => void;
-	// eslint-disable-next-line no-unused-vars
 	onSelected: (index: number) => void;
-	onAdd?: () => void;
+	onAdd: () => boolean;
 }
 
 interface ElementPosition {
@@ -29,27 +25,26 @@ interface ElementPosition {
 	moved?: number;
 }
 
-// Custom Hooks
-// eslint-disable-next-line no-unused-vars
-const useSelect = (onSelected: (index: number) => void, outer?: number, inner?: number) => {
-	const [selected, setSelected] = useState<number | undefined>(inner);
-
-	return {
-		selectedTab: selected === undefined ? outer : selected,
-		changeTab: outer === undefined ? setSelected : onSelected,
-	};
-};
-
 export const ConviTab: React.FC<ConviTabProps> = props => {
-	const { selectedTab, changeTab } = useSelect(props.onSelected, props.selected, props.defaultIndex);
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const {
+		selected,
+		ableChangeTitle,
+		forceRender,
+		draggableTab,
+		children,
+		onClose,
+		onTabPositionChange,
+		onSelected,
+		onAdd,
+		...divProps
+	} = props;
+
 	const refs = useRef<any>([]);
 
-	let positions: ElementPosition[] = [];
+	const positions = useRef<ElementPosition[]>([]);
 
 	useEffect(() => {
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-		positions = props.children.map((_, childIndex) => {
+		positions.current = children.map((_, childIndex) => {
 			const el = refs.current.find((__: unknown, index: number) => index === childIndex);
 			const rec = el && el.getBoundingClientRect();
 
@@ -58,12 +53,12 @@ export const ConviTab: React.FC<ConviTabProps> = props => {
 				rec,
 			};
 		});
-	}, [props.children, props.selected]);
+	}, [children, selected]);
 
 	const handleDrag = (index: number, e: React.DragEvent<HTMLSpanElement>) => {
 		const delta = e.pageX || e.clientX;
 
-		positions.forEach(pos => {
+		positions.current.forEach(pos => {
 			const prevMoved = pos.moved || 0;
 			const swap = index !== pos.index && pos.rec.left + prevMoved < delta && delta < pos.rec.right + prevMoved;
 			if (swap) {
@@ -74,7 +69,7 @@ export const ConviTab: React.FC<ConviTabProps> = props => {
 				const movePx = minus * (pos.rec.right - pos.rec.left) - prevMoved;
 
 				refs.current[pos.index].style.transform = `translate(${movePx}px, 0px)`;
-				positions[idx2].moved = movePx;
+				positions.current[idx2].moved = movePx;
 			}
 		});
 	};
@@ -83,16 +78,16 @@ export const ConviTab: React.FC<ConviTabProps> = props => {
 		const delta = e.pageX || e.clientX;
 		let swapedTabs = null;
 
-		positions.forEach(pos => {
+		positions.current.forEach(pos => {
 			const swap = index !== pos.index && pos.rec.left < delta && delta < pos.rec.right;
-			if (swap) swapedTabs = swapArrayElement(props.children, index, pos.index);
+			if (swap) swapedTabs = swapArrayElement(children, index, pos.index);
 			refs.current[pos.index].style.transform = `translate(0px, 0px)`;
 		});
 
-		const newTabs = swapedTabs || props.children;
+		const newTabs = swapedTabs || children;
 		if (swapedTabs) {
-			props.onSelected(index);
-			props.onTabPositionChange(newTabs);
+			onSelected(index);
+			onTabPositionChange(newTabs);
 		}
 	};
 
@@ -102,56 +97,62 @@ export const ConviTab: React.FC<ConviTabProps> = props => {
 		currentTabs: React.ReactElement<ConviTabElementProps>[]
 	) => {
 		const newTabs = currentTabs.map((tab, index) =>
-			currentIndex === index ? <ConviTabElement {...tab.props} title={newTitle} /> : tab
+			currentIndex === index ? (
+				<ConviTabElement title={newTitle} fixed={tab.props.fixed}>
+					{tab.props.children}
+				</ConviTabElement>
+			) : (
+				tab
+			)
 		);
-		props.onTabPositionChange(newTabs);
+		onTabPositionChange(newTabs);
 	};
 
 	return (
-		<ConviTabStyle>
+		// eslint-disable-next-line react/jsx-props-no-spreading
+		<ConviTabStyle {...divProps}>
 			<ConviTabHeaderStyle>
-				{props.children.map((child: React.ReactElement<ConviTabElementProps>, tabIndex: number) => (
+				{children.map((child: React.ReactElement<ConviTabElementProps>, tabIndex: number) => (
 					<ConviTabHeaderElement
 						ref={el => {
 							refs.current[tabIndex] = el;
 						}}
-						// eslint-disable-next-line react/no-array-index-key
-						key={tabIndex}
+						key={`${child.props.title}-${tabIndex * 1}`}
 						index={tabIndex}
-						selected={selectedTab === tabIndex}
-						fixed={child.props.fixed || props.defaultIndex !== undefined}
-						ableChangeTitle={props.ableChangeTitle}
-						draggableTab={props.draggableTab}
-						onTabTitleChange={(newTitle: string) => handleTabTitleChange(newTitle, tabIndex, props.children)}
+						selected={selected === tabIndex}
+						fixed={child.props.fixed}
+						ableChangeTitle={ableChangeTitle}
+						draggableTab={draggableTab}
+						onTabTitleChange={(newTitle: string) => handleTabTitleChange(newTitle, tabIndex, children)}
 						onDrag={e => handleDrag(tabIndex, e)}
 						onDragEnd={e => handleDragEnd(tabIndex, e)}
-						onSelected={(index: number) => changeTab(index)}
+						onSelected={(index: number) => onSelected(index)}
 						onClose={() => {
-							// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-							changeTab(selectedTab! - 1 || selectedTab! + 1);
-							props.onClose(tabIndex);
+							onSelected(selected - 1 || selected + 1);
+							onClose(tabIndex);
 						}}
 					>
 						{child.props.title}
 					</ConviTabHeaderElement>
 				))}
 
-				{props.onAdd && props.defaultIndex === undefined && (
+				{onAdd() && (
 					<ConviTabPlusButton
 						onClick={() => {
-							props.onAdd?.();
-							props.onSelected(props.children.length);
+							onAdd();
+							onSelected(children.length);
 						}}
 					/>
 				)}
 			</ConviTabHeaderStyle>
 
-			{props.forceRender
-				? selectedTab !== undefined &&
-				  props.children.map((child, index) => (
-						<span className={`${selectedTab === index ? 'inline' : 'hidden'}`}>{child}</span>
+			{forceRender
+				? children.map((child, index) => (
+						<span key={`${child.props.title}-${index * 1}`} className={`${selected === index ? 'inline' : 'hidden'}`}>
+							{child}
+						</span>
 				  ))
-				: selectedTab !== undefined && props.children[selectedTab]}
+				: children[selected]}
 		</ConviTabStyle>
 	);
 };
