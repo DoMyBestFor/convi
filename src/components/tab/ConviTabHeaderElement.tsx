@@ -9,18 +9,15 @@ export interface ConviTabHeaderElementProps extends HTMLAttributes<HTMLSpanEleme
 	children: string;
 	selected: boolean;
 	index: number;
-	// eslint-disable-next-line no-unused-vars
 	onTabTitleChange: (newTitle: string) => void;
 	draggableTab?: boolean;
 	ableChangeTitle?: boolean;
 	fixed?: boolean;
-	// eslint-disable-next-line no-unused-vars
 	onSelected: (index: number) => void;
 	onClose: () => void;
 }
 
 // Custom Hooks
-// eslint-disable-next-line no-unused-vars
 const useTabTitles = (title: string, onTabTitleChange: (newTitle: string) => void, ableChangeTitle?: boolean) => {
 	const [editMode, setEditMode] = useState<boolean>(false);
 	const [tabTitle, setTabTitle] = useState<string>(title);
@@ -59,7 +56,6 @@ const useTabTitles = (title: string, onTabTitleChange: (newTitle: string) => voi
 export const ConviTabHeaderElement = forwardRef<
 	React.ReactElement<ConviTabHeaderElementProps>,
 	ConviTabHeaderElementProps
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 >((props: ConviTabHeaderElementProps, ref: any) => {
 	const {
 		children,
@@ -84,6 +80,7 @@ export const ConviTabHeaderElement = forwardRef<
 
 	return (
 		<ConviTabHeaderElementStyle
+			// eslint-disable-next-line react/jsx-props-no-spreading
 			{...spanProps}
 			ref={ref}
 			draggable={draggableTab}
