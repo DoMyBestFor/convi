@@ -16,22 +16,11 @@ module.exports = {
 	plugins: ['@typescript-eslint', 'react', 'tailwindcss', 'jsx-a11y', 'import', 'react-hooks', 'prettier'],
 	extends: ['plugin:@typescript-eslint/recommended', 'plugin:import/typescript', 'airbnb', 'airbnb/hooks', 'prettier'],
 	rules: {
-		'no-unused-vars': 'warn',
-
 		'react/jsx-filename-extension': ['error', { extensions: ['.tsx', '.ts', 'js', 'jsx'] }],
-		'react/destructuring-assignment': 'off',
-		'react/react-in-jsx-scope': 'off',
-		'react/no-unused-prop-types': 'off',
-		'react/prop-types': 'off',
-		'react/require-default-props': 'off',
-		'react/function-component-definition': 'off',
-		'react/no-children-prop': 'warn',
-		'react/jsx-props-no-spreading': 'off',
-		'react/no-array-index-key': 'warn',
-		'react/jsx-no-useless-fragment': 'warn',
-		'react/no-unstable-nested-components': 'warn',
-		'react-hooks/exhaustive-deps': 'warn',
-		'react/default-props-match-prop-types': 'warn',
+		'react/function-component-definition': ['error', { "namedComponents": 'arrow-function', "unnamedComponents": 'arrow-function' }], // arrow function
+
+		'no-unused-vars': 'off',
+		'@typescript-eslint/no-unused-vars': ['error'],
 
 		'import/extensions': [
 			'error',
@@ -44,9 +33,6 @@ module.exports = {
 				tsx: 'never',
 			},
 		],
-		'import/no-unresolved': 'warn',
-		'import/no-named-default': 'warn',
-		'import/no-cycle': 'warn',
 		'import/prefer-default-export': 'off',
 
 		'prettier/prettier': ['error', { endOfLine: 'auto' }],
