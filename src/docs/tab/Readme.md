@@ -18,7 +18,7 @@ ConviTab에서 제공하는 대표적인 기능은 다음과 같다.
 | --- | --- | --- |
 |selected|<div style='color: green'>number</div>|선택된 Tab의 index 값
 |ableChangeTitle?|<div style='color: blue'>boolean</div>|true이면 tab의 title을 수정 가능함. (trigger => doubleClick) **기본값 false**
-|forceRender?|<div style='color: blue'>boolean</div>|true이면 tab이 변경 될 때마다 매번 새로운 tab element DOM을 DOM Tree에 가져옴. 결과적으로 tab elements의 상태 유지가 필요없을 때 사용. **기본값 true**
+|forceRender?|<div style='color: blue'>boolean</div>|true이면 tab이 변경 될 때마다 매번 새로운 tab element DOM을 DOM Tree에 가져옴. 결과적으로 tab elements의 상태 유지가 필요없을 때 사용. **기본값 false**
 |draggableTab?|<div style='color: blue'>boolean</div>|true이면 tab header를 drag 이벤트로 이동 시킬 수 있음. **기본값 false**|
 |children|<div style='font-weight: bold'>React.ReactElement\<ConviTabElementProps>[]</div>|tab elements를 children 형태로 넘겨준다. 개별 element들은 반드시 ConviTabElement 컴포넌트로 감싸져야 한다.
 |onClose|<div style='color: purple'>(index: number) => void</div>|Tab을 삭제하기 위해 실행될 이벤트 핸들러|
@@ -30,5 +30,5 @@ ConviTab에서 제공하는 대표적인 기능은 다음과 같다.
 | `name` | `type` | `desc` |
 | --- | --- | --- |
 |defaultIndex|<div style='color: green'>number</div>|선택된 Tab의 초기 index 값, 해당 props 지정 시 UnControlled Tab으로 동작하여 제어가 Tab 내부에서 이루어짐.
-|forceRender?|<div style='color: blue'>boolean</div>|true이면 tab이 변경 될 때마다 매번 새로운 tab element DOM을 DOM Tree에 가져옴. 결과적으로 tab elements의 상태 유지가 필요없을 때 사용. **기본값 true**
+|forceRender?|<div style='color: blue'>boolean</div>|true이면 tab이 변경 될 때마다 매번 새로운 tab element DOM을 DOM Tree에 가져옴. 결과적으로 tab elements의 상태 유지가 필요없을 때 사용. **기본값 false**
 |children|<div style='font-weight: bold'>React.ReactElement\<ConviTabElementProps>[]</div>|tab elements를 children 형태로 넘겨준다. 개별 element들은 반드시 ConviTabElement 컴포넌트로 감싸져야 한다.
