@@ -103,7 +103,7 @@ export const ConviTabHeaderElement = forwardRef<
 
 // Default Props
 ConviTabHeaderElement.defaultProps = {
-	draggableTab: true,
+	draggableTab: false,
 	ableChangeTitle: false,
 	fixed: false,
 };

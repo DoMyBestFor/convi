@@ -41,7 +41,7 @@ export const ConviUncontrolledTab: React.FC<ConviUncontrolledTabProps> = props =
 						<span
 							key={`${child.props.title}-${index * 1}`}
 							css={css`
-								visibility: ${selected === index ? 'visible' : 'hidden'};
+								display: ${selected === index ? 'inline' : 'none'};
 							`}
 						>
 							{child}
