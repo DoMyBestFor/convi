@@ -36,7 +36,7 @@ export const ConviUncontrolledTab: React.FC<ConviUncontrolledTabProps> = props =
 				))}
 			</div>
 
-			{forceRender
+			{!forceRender
 				? children.map((child, index) => (
 						<span
 							key={`${child.props.title}-${index * 1}`}

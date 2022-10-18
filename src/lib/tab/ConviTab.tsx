@@ -145,7 +145,7 @@ export const ConviTab: React.FC<ConviTabProps> = props => {
 				)}
 			</div>
 
-			{forceRender
+			{!forceRender
 				? children.map((child, index) => (
 						<span
 							key={`${child.props.title}-${index * 1}`}
