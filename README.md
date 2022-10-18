@@ -1,8 +1,8 @@
 # Convi
-사용하기 편리한 ui 라이브러리를 목표로 합니다.
+Easy-to-use ui library.
 
 ## Start
-준비중
+Soon..
 
 ## Docs
 |`component`|`docs`|
