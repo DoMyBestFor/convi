@@ -1,5 +1,5 @@
 import { AiOutlinePlus } from 'react-icons/ai';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 export const ConviTabPlusButton = styled(AiOutlinePlus)`
 	margin-top: auto;

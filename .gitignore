@@ -7,12 +7,10 @@
 
 # testing
 /coverage
-/src/App.tsx
-/src/index.tsx
 
 # production
 /build
-/public
+/dist
 
 # misc
 .DS_Store

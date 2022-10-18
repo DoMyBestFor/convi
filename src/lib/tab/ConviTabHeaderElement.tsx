@@ -1,15 +1,16 @@
-import React, { forwardRef, HTMLAttributes, useEffect, useState } from 'react';
-import { ConviTabHeaderEditTitleStyle } from '../style/tab/ConviTabHeaderEditTitleStyle';
-import { ConviTabHeaderElementStyle } from '../style/tab/ConviTabHeaderElementStyle';
-import { ConviTabHeaderTitleStyle } from '../style/tab/ConviTabHeaderTitleStyle';
+/** @jsxImportSource @emotion/react */
+import React, { forwardRef, useEffect, useState } from 'react';
+import { ConviTabHeaderElementStyle, editStyle, nonEditStyle } from '../style/ConviTabStyle';
 import { ConviTabCloseButton } from './ConviTabCloseButton';
 
 // Types
-export interface ConviTabHeaderElementProps extends HTMLAttributes<HTMLSpanElement> {
+export interface ConviTabHeaderElementProps {
 	children: string;
 	selected: boolean;
 	index: number;
 	onTabTitleChange: (newTitle: string) => void;
+	onHeaderDrag: (e: any) => void;
+	onHeaderDragEnd: (e: any) => void;
 	draggableTab?: boolean;
 	ableChangeTitle?: boolean;
 	fixed?: boolean;
@@ -32,7 +33,8 @@ const useTabTitles = (title: string, onTabTitleChange: (newTitle: string) => voi
 	return {
 		titleContent: () =>
 			editMode && ableChangeTitle ? (
-				<ConviTabHeaderEditTitleStyle
+				<input
+					css={editStyle}
 					value={tabTitle}
 					autoFocus
 					onChange={handleChange}
@@ -48,7 +50,9 @@ const useTabTitles = (title: string, onTabTitleChange: (newTitle: string) => voi
 					}}
 				/>
 			) : (
-				<ConviTabHeaderTitleStyle onDoubleClick={handleDoubleClick}>{tabTitle}</ConviTabHeaderTitleStyle>
+				<span css={nonEditStyle} onDoubleClick={handleDoubleClick}>
+					{tabTitle}
+				</span>
 			),
 	};
 };
@@ -67,7 +71,8 @@ export const ConviTabHeaderElement = forwardRef<
 		onClose,
 		ableChangeTitle,
 		draggableTab,
-		...spanProps
+		onHeaderDrag,
+		onHeaderDragEnd,
 	} = props;
 
 	const [displayCloseButton, setDisplayCloseButton] = useState<boolean>(false);
@@ -81,18 +86,17 @@ export const ConviTabHeaderElement = forwardRef<
 	return (
 		<ConviTabHeaderElementStyle
 			// eslint-disable-next-line react/jsx-props-no-spreading
-			{...spanProps}
 			ref={ref}
 			draggable={draggableTab}
 			selected={selected}
+			onDrag={e => onHeaderDrag(e)}
+			onDragEnd={e => onHeaderDragEnd(e)}
 			onClick={handleClick}
 			onMouseOver={handleMouseOver}
 			onMouseOut={handleMouseOut}
 		>
 			{titleContent()}
-			{fixed || (
-				<ConviTabCloseButton className={`${displayCloseButton ? 'visible' : 'invisible'}`} onClick={handleClose} />
-			)}
+			{fixed || <ConviTabCloseButton displayCloseBtn={displayCloseButton} onClick={handleClose} />}
 		</ConviTabHeaderElementStyle>
 	);
 });

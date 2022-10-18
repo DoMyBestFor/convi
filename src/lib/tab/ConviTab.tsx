@@ -1,13 +1,14 @@
-import React, { HTMLAttributes, useEffect, useRef } from 'react';
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
+import React, { useEffect, useRef } from 'react';
 import { ConviTabHeaderElement } from './ConviTabHeaderElement';
-import ConviTabElement, { ConviTabElementProps } from './ConviTabElement';
-import { ConviTabHeaderStyle } from '../style/tab/ConviTabHeaderStyle';
-import { ConviTabStyle } from '../style/tab/ConviTabStyle';
+import { ConviTabElement, ConviTabElementProps } from './ConviTabElement';
 import { swapArrayElement } from '../utils/Util';
 import { ConviTabPlusButton } from './ConviTabPlusButton';
+import { ConviTabStyle } from '../style/ConviTabStyle';
 
 // Type
-interface ConviTabProps extends HTMLAttributes<HTMLDivElement> {
+export interface ConviTabProps {
 	selected: number;
 	ableChangeTitle?: boolean;
 	forceRender?: boolean;
@@ -19,13 +20,13 @@ interface ConviTabProps extends HTMLAttributes<HTMLDivElement> {
 	onAdd: () => boolean;
 }
 
-interface ElementPosition {
+export interface ElementPosition {
 	index: number;
 	rec: DOMRect;
 	moved?: number;
 }
 
-const ConviTab: React.FC<ConviTabProps> = props => {
+export const ConviTab: React.FC<ConviTabProps> = props => {
 	const {
 		selected,
 		ableChangeTitle,
@@ -36,7 +37,6 @@ const ConviTab: React.FC<ConviTabProps> = props => {
 		onTabPositionChange,
 		onSelected,
 		onAdd,
-		...divProps
 	} = props;
 
 	const refs = useRef<any>([]);
@@ -109,9 +109,8 @@ const ConviTab: React.FC<ConviTabProps> = props => {
 	};
 
 	return (
-		// eslint-disable-next-line react/jsx-props-no-spreading
-		<ConviTabStyle {...divProps}>
-			<ConviTabHeaderStyle>
+		<ConviTabStyle>
+			<div>
 				{children.map((child: React.ReactElement<ConviTabElementProps>, tabIndex: number) => (
 					<ConviTabHeaderElement
 						ref={el => {
@@ -124,8 +123,8 @@ const ConviTab: React.FC<ConviTabProps> = props => {
 						ableChangeTitle={ableChangeTitle}
 						draggableTab={draggableTab}
 						onTabTitleChange={(newTitle: string) => handleTabTitleChange(newTitle, tabIndex, children)}
-						onDrag={e => handleDrag(tabIndex, e)}
-						onDragEnd={e => handleDragEnd(tabIndex, e)}
+						onHeaderDrag={(e: any) => handleDrag(tabIndex, e)}
+						onHeaderDragEnd={(e: any) => handleDragEnd(tabIndex, e)}
 						onSelected={(index: number) => onSelected(index)}
 						onClose={() => {
 							onSelected(selected - 1 || selected + 1);
@@ -144,11 +143,16 @@ const ConviTab: React.FC<ConviTabProps> = props => {
 						}}
 					/>
 				)}
-			</ConviTabHeaderStyle>
+			</div>
 
 			{forceRender
 				? children.map((child, index) => (
-						<span key={`${child.props.title}-${index * 1}`} className={`${selected === index ? 'inline' : 'hidden'}`}>
+						<span
+							key={`${child.props.title}-${index * 1}`}
+							css={css`
+								display: ${selected === index ? 'inline' : 'none'};
+							`}
+						>
 							{child}
 						</span>
 				  ))

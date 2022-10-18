@@ -1,24 +1,24 @@
-import React, { HTMLAttributes, useState } from 'react';
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
+import React, { useState } from 'react';
 import { ConviTabHeaderElement } from './ConviTabHeaderElement';
 import { ConviTabElementProps } from './ConviTabElement';
-import { ConviTabHeaderStyle } from '../style/tab/ConviTabHeaderStyle';
-import { ConviTabStyle } from '../style/tab/ConviTabStyle';
+import { ConviTabStyle } from '../style/ConviTabStyle';
 
 // Type
-interface ConviUncontrolledTabProps extends HTMLAttributes<HTMLDivElement> {
+export interface ConviUncontrolledTabProps {
 	defaultIndex: number;
 	forceRender?: boolean;
 	children: React.ReactElement<ConviTabElementProps>[];
 }
 
-const ConviUncontrolledTab: React.FC<ConviUncontrolledTabProps> = props => {
-	const { defaultIndex, forceRender, children, ...divProps } = props;
+export const ConviUncontrolledTab: React.FC<ConviUncontrolledTabProps> = props => {
+	const { defaultIndex, forceRender, children } = props;
 	const [selected, setSelected] = useState<number>(defaultIndex);
 
 	return (
-		// eslint-disable-next-line react/jsx-props-no-spreading
-		<ConviTabStyle {...divProps}>
-			<ConviTabHeaderStyle>
+		<ConviTabStyle>
+			<div>
 				{children.map((child: React.ReactElement<ConviTabElementProps>, tabIndex: number) => (
 					<ConviTabHeaderElement
 						key={`${child.props.title}-${tabIndex * 1}`}
@@ -28,15 +28,22 @@ const ConviUncontrolledTab: React.FC<ConviUncontrolledTabProps> = props => {
 						fixed={child.props.fixed || defaultIndex !== undefined}
 						onSelected={(index: number) => setSelected(index)}
 						onClose={() => null}
+						onHeaderDrag={(e: any) => console.log(e)}
+						onHeaderDragEnd={(e: any) => console.log(e)}
 					>
 						{child.props.title}
 					</ConviTabHeaderElement>
 				))}
-			</ConviTabHeaderStyle>
+			</div>
 
 			{forceRender
 				? children.map((child, index) => (
-						<span key={`${child.props.title}-${index * 1}`} className={`${selected === index ? 'inline' : 'hidden'}`}>
+						<span
+							key={`${child.props.title}-${index * 1}`}
+							css={css`
+								visibility: ${selected === index ? 'visible' : 'hidden'};
+							`}
+						>
 							{child}
 						</span>
 				  ))

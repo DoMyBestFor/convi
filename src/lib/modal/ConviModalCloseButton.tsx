@@ -1,10 +1,10 @@
 import { AiOutlineClose } from 'react-icons/ai';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 export const ConviModalCloseButton = styled(AiOutlineClose)`
 	margin-left: auto;
-	margin-bottom: auto;
 	margin-top: auto;
+	margin-bottom: auto;
 	cursor: pointer;
 	:hover {
 		color: red;

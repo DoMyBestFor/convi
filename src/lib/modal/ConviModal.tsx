@@ -1,32 +1,31 @@
+/** @jsxImportSource @emotion/react */
 import React, { ReactNode } from 'react';
-import { ConviModalBackdropStyle } from '../style/modal/ConviModalBackdropStyle';
-import { ConviModalContentStyle } from '../style/modal/ConviModalContentStyle';
-import { ConviModalStyle } from '../style/modal/ConviModalStyle';
-import { ConviModalTitlebar } from '../style/modal/ConviModalTitlebar';
 import { ConviModalCloseButton } from './ConviModalCloseButton';
+import { ConviModalStyle, ConviModalTitle } from '../style/ConviModalStyle';
 
 interface ConviModalProps {
 	open: boolean; // modal open state
 	onClose: () => void; // close modal
 	preventBackdropClick?: boolean; // prevent click event for backdrop
 	children: ReactNode; // children
-	title?: ReactNode; // modal title
+	title: ReactNode; // modal title
 }
 
-const ConviModal: React.FC<ConviModalProps> = props => {
+export const ConviModal: React.FC<ConviModalProps> = props => {
 	const { open, onClose, title, children, preventBackdropClick } = props;
 	return (
 		<ConviModalStyle open={open}>
-			<ConviModalBackdropStyle onMouseDown={() => !preventBackdropClick && onClose()} />
-			<ConviModalContentStyle>
-				{title && (
-					<ConviModalTitlebar>
-						{title}
-						<ConviModalCloseButton onClick={() => onClose()} />
-					</ConviModalTitlebar>
-				)}
+			{
+				// eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/no-static-element-interactions, jsx-a11y/no-noninteractive-element-interactions
+				<div role="document" onMouseDown={() => !preventBackdropClick && onClose()} />
+			}
+			<div>
+				<div css={ConviModalTitle}>
+					{title}
+					<ConviModalCloseButton onClick={() => onClose()} />
+				</div>
 				{children}
-			</ConviModalContentStyle>
+			</div>
 		</ConviModalStyle>
 	);
 };
@@ -34,7 +33,6 @@ const ConviModal: React.FC<ConviModalProps> = props => {
 // default props
 ConviModal.defaultProps = {
 	preventBackdropClick: false,
-	title: 'Modal',
 };
 
 export default ConviModal;
