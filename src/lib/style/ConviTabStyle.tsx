@@ -25,12 +25,12 @@ export const ConviTabHeaderElementStyle = styled.span<{ selected: boolean }>`
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
 	cursor: pointer;
-	background-color: ${props => (props.selected ? 'white' : '#9DAABC')};
-	max-width: 10%;
+	background-color: ${props => (props.selected ? 'white' : '#E5E7Eb')};
+	max-width: 8%;
 `;
 
 export const editStyle = css`
-	width: 100%;
+	width: 50%;
 `;
 
 export const nonEditStyle = css`
