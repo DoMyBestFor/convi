@@ -17,7 +17,7 @@ export interface ConviTabProps {
 	onClose: (index: number) => void;
 	onTabPositionChange: (currentTabs: React.ReactElement<ConviTabElementProps>[]) => void;
 	onSelected: (index: number) => void;
-	onAdd: () => boolean;
+	onAdd?: () => void;
 }
 
 export interface ElementPosition {
@@ -135,7 +135,7 @@ export const ConviTab: React.FC<ConviTabProps> = props => {
 					</ConviTabHeaderElement>
 				))}
 
-				{onAdd() && (
+				{onAdd && (
 					<ConviTabPlusButton
 						onClick={() => {
 							onAdd();
@@ -166,6 +166,7 @@ ConviTab.defaultProps = {
 	ableChangeTitle: false,
 	forceRender: false,
 	draggableTab: true,
+	onAdd: () => 0,
 };
 
 export default ConviTab;
