@@ -7,11 +7,16 @@ export const ConviTabStyle = styled.div`
 	border: 1px solid black;
 
 	// header
-	& > div:nth-child(1) {
+	& > div:nth-child(1) > div {
 		display: flex;
 		height: 25px;
 		text-align: left;
 		background-color: lightgray;
+		position: relative;
+		white-space: nowrap;
+		overflow: hidden;
+		width: 100%;
+		z-index: 100;
 	}
 `;
 
