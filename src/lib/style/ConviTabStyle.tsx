@@ -2,14 +2,13 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 export const ConviTabStyle = styled.div`
-	display: flex;
-	flex-direction: column;
-	border: 1px solid black;
-
-	// header
-	& > div:nth-child(1) > div {
+	.header {
 		display: flex;
 		height: 25px;
+	}
+
+	.tabList {
+		display: flex;
 		text-align: left;
 		background-color: lightgray;
 		position: relative;
@@ -17,6 +16,7 @@ export const ConviTabStyle = styled.div`
 		overflow: hidden;
 		width: 100%;
 		z-index: 100;
+		scroll-behavior: smooth;
 	}
 `;
 
