@@ -1,4 +1,5 @@
 /** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 import React, { forwardRef, useEffect, useState } from 'react';
 import { ConviTabHeaderElementStyle, editStyle, nonEditStyle } from '../style/ConviTabStyle';
 import { ConviTabCloseButton } from './ConviTabCloseButton';
@@ -13,6 +14,7 @@ export interface ConviTabHeaderElementProps {
 	onHeaderDragEnd: (e: any) => void;
 	draggableTab?: boolean;
 	ableChangeTitle?: boolean;
+	icon?: React.ReactElement;
 	fixed?: boolean;
 	onSelected: (index: number) => void;
 	onClose: () => void;
@@ -71,6 +73,7 @@ export const ConviTabHeaderElement = forwardRef<
 		onClose,
 		ableChangeTitle,
 		draggableTab,
+		icon,
 		onHeaderDrag,
 		onHeaderDragEnd,
 	} = props;
@@ -95,6 +98,14 @@ export const ConviTabHeaderElement = forwardRef<
 			onMouseOver={handleMouseOver}
 			onMouseOut={handleMouseOut}
 		>
+			<span
+				css={css`
+					margin-top: auto;
+					margin-bottom: auto;
+				`}
+			>
+				{icon}
+			</span>
 			{titleContent()}
 			{fixed || <ConviTabCloseButton displayCloseBtn={displayCloseButton} onClick={handleClose} />}
 		</ConviTabHeaderElementStyle>
@@ -106,4 +117,5 @@ ConviTabHeaderElement.defaultProps = {
 	draggableTab: false,
 	ableChangeTitle: false,
 	fixed: false,
+	icon: undefined,
 };

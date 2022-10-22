@@ -24,6 +24,7 @@ export const ConviUncontrolledTab: React.FC<ConviUncontrolledTabProps> = props =
 						key={`${child.props.title}-${tabIndex * 1}`}
 						index={tabIndex}
 						selected={selected === tabIndex}
+						icon={child.props.frontIcon}
 						onTabTitleChange={() => null}
 						fixed={child.props.fixed || defaultIndex !== undefined}
 						onSelected={(index: number) => setSelected(index)}
@@ -55,6 +56,7 @@ export const ConviUncontrolledTab: React.FC<ConviUncontrolledTabProps> = props =
 // default Props
 ConviUncontrolledTab.defaultProps = {
 	forceRender: false,
+	frontIcon: undefined,
 };
 
 export default ConviUncontrolledTab;

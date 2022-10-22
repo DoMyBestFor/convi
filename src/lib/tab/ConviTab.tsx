@@ -153,6 +153,7 @@ export const ConviTab: React.FC<ConviTabProps> = props => {
 							index={tabIndex}
 							selected={selected === tabIndex}
 							fixed={child.props.fixed}
+							icon={child.props.frontIcon}
 							ableChangeTitle={ableChangeTitle}
 							draggableTab={draggableTab}
 							onTabTitleChange={(newTitle: string) => handleTabTitleChange(newTitle, tabIndex, children)}
@@ -192,6 +193,7 @@ ConviTab.defaultProps = {
 	forceRender: false,
 	draggableTab: true,
 	onAdd: undefined,
+	frontIcon: undefined,
 };
 
 export default ConviTab;
