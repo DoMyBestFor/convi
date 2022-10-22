@@ -56,7 +56,6 @@ export const ConviUncontrolledTab: React.FC<ConviUncontrolledTabProps> = props =
 // default Props
 ConviUncontrolledTab.defaultProps = {
 	forceRender: false,
-	frontIcon: undefined,
 };
 
 export default ConviUncontrolledTab;
