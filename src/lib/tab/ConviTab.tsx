@@ -1,11 +1,12 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ConviTabHeaderElement } from './ConviTabHeaderElement';
 import { ConviTabElement, ConviTabElementProps } from './ConviTabElement';
 import { swapArrayElement } from '../utils/Util';
 import { ConviTabPlusButton } from './ConviTabPlusButton';
 import { ConviTabStyle } from '../style/ConviTabStyle';
+import { ConviTabScrollButton } from './ConviTabScrollButton';
 
 // Type
 export interface ConviTabProps {
@@ -26,6 +27,16 @@ export interface ElementPosition {
 	moved?: number;
 }
 
+const getPadding = (open: boolean) => {
+	let paddingLeft = 0;
+	let paddingRight = 0;
+	if (open) {
+		paddingLeft += 20;
+		paddingRight += 20;
+	}
+	return `0 ${paddingRight}px 0 ${paddingLeft}px`;
+};
+
 export const ConviTab: React.FC<ConviTabProps> = props => {
 	const {
 		selected,
@@ -39,13 +50,18 @@ export const ConviTab: React.FC<ConviTabProps> = props => {
 		onAdd,
 	} = props;
 
-	const refs = useRef<any>([]);
-
+	const headerRef = useRef<HTMLDivElement>(null); // tab 전체 길이를 알기 위해
+	const refs = useRef<any>([]); // elements들의 position을 구하기 위해 for draggable tab
 	const positions = useRef<ElementPosition[]>([]);
+
+	const [open, setOpen] = useState<boolean>(false);
+	const [scrollLocation, setScrollLocation] = useState(0);
 
 	useEffect(() => {
 		positions.current = children.map((_, childIndex) => {
-			const el = refs.current.find((__: unknown, index: number) => index === childIndex);
+			// assertion 사용 근거 : refs는 children에 대한 ref 객체 모음이기 때문에 length가 같다.
+			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+			const el = refs.current.find((__: unknown, index: number) => index === childIndex)!;
 			const rec = el && el.getBoundingClientRect();
 
 			return {
@@ -53,7 +69,17 @@ export const ConviTab: React.FC<ConviTabProps> = props => {
 				rec,
 			};
 		});
-	}, [children, selected]);
+
+		if (headerRef.current) {
+			if (headerRef.current.clientWidth < headerRef.current.scrollWidth) {
+				setOpen(true);
+				headerRef.current.style.padding = getPadding(true);
+			} else {
+				setOpen(false);
+				headerRef.current.style.padding = getPadding(false);
+			}
+		}
+	}, [children, selected, open]);
 
 	const handleDrag = (index: number, e: React.DragEvent<HTMLSpanElement>) => {
 		const delta = e.pageX || e.clientX;
@@ -108,43 +134,52 @@ export const ConviTab: React.FC<ConviTabProps> = props => {
 		onTabPositionChange(newTabs);
 	};
 
+	const renderScrollButton = (showScrollButton: boolean) =>
+		showScrollButton && <ConviTabScrollButton headerElement={headerRef.current} scrollLocation={scrollLocation} />;
+	const renderAddButton = (showAddButton: boolean) =>
+		showAddButton && (
+			<span>
+				<ConviTabPlusButton
+					onClick={() => {
+						// assertion 사용 근거 : showAddButton이 onAdd !== undefined로만 넘겨줄 것이기 때문.
+						onAdd!();
+						onSelected(children.length);
+					}}
+				/>
+			</span>
+		);
+
 	return (
 		<ConviTabStyle>
-			<div>
-				{children.map((child: React.ReactElement<ConviTabElementProps>, tabIndex: number) => (
-					<ConviTabHeaderElement
-						ref={el => {
-							refs.current[tabIndex] = el;
-						}}
-						key={`${child.props.title}-${tabIndex * 1}`}
-						index={tabIndex}
-						selected={selected === tabIndex}
-						fixed={child.props.fixed}
-						ableChangeTitle={ableChangeTitle}
-						draggableTab={draggableTab}
-						onTabTitleChange={(newTitle: string) => handleTabTitleChange(newTitle, tabIndex, children)}
-						onHeaderDrag={(e: any) => handleDrag(tabIndex, e)}
-						onHeaderDragEnd={(e: any) => handleDragEnd(tabIndex, e)}
-						onSelected={(index: number) => onSelected(index)}
-						onClose={() => {
-							onSelected(selected - 1 || selected + 1);
-							onClose(tabIndex);
-						}}
-					>
-						{child.props.title}
-					</ConviTabHeaderElement>
-				))}
-
-				{onAdd && (
-					<ConviTabPlusButton
-						onClick={() => {
-							onAdd();
-							onSelected(children.length);
-						}}
-					/>
-				)}
+			<div className="header">
+				<div className="tabList" ref={headerRef} onScroll={e => setScrollLocation(e.currentTarget.scrollLeft)}>
+					{renderScrollButton(open)}
+					{children.map((child: React.ReactElement<ConviTabElementProps>, tabIndex: number) => (
+						<ConviTabHeaderElement
+							ref={el => {
+								refs.current[tabIndex] = el;
+							}}
+							key={`${child.props.title}-${tabIndex * 1}`}
+							index={tabIndex}
+							selected={selected === tabIndex}
+							fixed={child.props.fixed}
+							ableChangeTitle={ableChangeTitle}
+							draggableTab={draggableTab}
+							onTabTitleChange={(newTitle: string) => handleTabTitleChange(newTitle, tabIndex, children)}
+							onHeaderDrag={(e: React.DragEvent<HTMLSpanElement>) => handleDrag(tabIndex, e)}
+							onHeaderDragEnd={(e: React.DragEvent<HTMLSpanElement>) => handleDragEnd(tabIndex, e)}
+							onSelected={(index: number) => onSelected(index)}
+							onClose={() => {
+								onSelected(selected - 1 || selected + 1);
+								onClose(tabIndex);
+							}}
+						>
+							{child.props.title}
+						</ConviTabHeaderElement>
+					))}
+				</div>
+				{renderAddButton(onAdd !== undefined)}
 			</div>
-
 			{!forceRender
 				? children.map((child, index) => (
 						<span
@@ -166,7 +201,7 @@ ConviTab.defaultProps = {
 	ableChangeTitle: false,
 	forceRender: false,
 	draggableTab: true,
-	onAdd: () => 0,
+	onAdd: undefined,
 };
 
 export default ConviTab;

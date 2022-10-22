@@ -6,6 +6,12 @@
   "types": "dist/index.d.ts",
   "browser": "./browser/specific/main.js",
   "keywords": ["ui", "emotion", "tab", "modal", "react"],
+  "homepage": "https://github.com/DoMyBestFor/convi",
+  "bugs": {
+    "url": "https://github.com/DoMyBestFor/convi/issues",
+    "email": "asdfg9377@naver.com"
+  },
+  "license": "MIT",
   "description": "Convinient UI library",
   "author": {
     "name": "jongdae park",
