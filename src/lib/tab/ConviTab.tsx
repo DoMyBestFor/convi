@@ -193,7 +193,6 @@ ConviTab.defaultProps = {
 	forceRender: false,
 	draggableTab: true,
 	onAdd: undefined,
-	frontIcon: undefined,
 };
 
 export default ConviTab;
