@@ -1,13 +1,12 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import React, { useEffect, useRef } from 'react';
-import { AiOutlineCaretLeft, AiOutlineCaretRight } from 'react-icons/ai';
+import React, { useEffect, useRef, useState } from 'react';
 import { ConviTabHeaderElement } from './ConviTabHeaderElement';
 import { ConviTabElement, ConviTabElementProps } from './ConviTabElement';
 import { swapArrayElement } from '../utils/Util';
 import { ConviTabPlusButton } from './ConviTabPlusButton';
 import { ConviTabStyle } from '../style/ConviTabStyle';
-import { useState } from 'react';
+import { ConviTabScrollButton } from './ConviTabScrollButton';
 
 // Type
 export interface ConviTabProps {
@@ -38,55 +37,6 @@ const getPadding = (open: boolean) => {
 	return `0 ${paddingRight}px 0 ${paddingLeft}px`;
 };
 
-const ArrowButton: React.FC<{ headerRef: any }> = props => {
-	const myRef = useRef<HTMLDivElement>(null);
-	const a = 0;
-	return (
-		<div ref={myRef}>
-			<span>
-				<AiOutlineCaretLeft
-					style={{
-						width: '20px',
-						backgroundColor: '#EEEEEE',
-						height: '100%',
-						display: 'inline-block',
-						filter: 'none',
-						position: 'absolute',
-						// eslint-disable-next-line react/destructuring-assignment
-						left: `${props.headerRef.scrollLeft}`,
-						justifyContent: 'center',
-						textAlign: 'center',
-					}}
-					onClick={() => {
-						// eslint-disable-next-line react/destructuring-assignment
-						props.headerRef.scrollTo(props.headerRef.scrollLeft - 10, 0);
-					}}
-				/>
-			</span>
-			<span>
-				<AiOutlineCaretRight
-					style={{
-						width: '20px',
-						backgroundColor: '#EEEEEE',
-						height: '100%',
-						display: 'inline-block',
-						filter: 'none',
-						position: 'absolute',
-						// eslint-disable-next-line react/destructuring-assignment
-						right: 0,
-						justifyContent: 'center',
-						textAlign: 'center',
-					}}
-					onClick={() => {
-						// eslint-disable-next-line react/destructuring-assignment
-						props.headerRef.scrollTo(props.headerRef.scrollLeft + 10, 0);
-					}}
-				/>
-			</span>
-		</div>
-	);
-};
-
 export const ConviTab: React.FC<ConviTabProps> = props => {
 	const {
 		selected,
@@ -105,6 +55,7 @@ export const ConviTab: React.FC<ConviTabProps> = props => {
 	const positions = useRef<ElementPosition[]>([]);
 
 	const [open, setOpen] = useState<boolean>(false);
+	const [scrollLocation, setScrollLocation] = useState(0);
 
 	useEffect(() => {
 		positions.current = children.map((_, childIndex) => {
@@ -123,6 +74,9 @@ export const ConviTab: React.FC<ConviTabProps> = props => {
 			if (headerRef.current.clientWidth < headerRef.current.scrollWidth) {
 				setOpen(true);
 				headerRef.current.style.padding = getPadding(true);
+			} else {
+				setOpen(false);
+				headerRef.current.style.padding = getPadding(false);
 			}
 		}
 	}, [children, selected, open]);
@@ -180,11 +134,26 @@ export const ConviTab: React.FC<ConviTabProps> = props => {
 		onTabPositionChange(newTabs);
 	};
 
+	const renderScrollButton = (showScrollButton: boolean) =>
+		showScrollButton && <ConviTabScrollButton headerElement={headerRef.current} scrollLocation={scrollLocation} />;
+	const renderAddButton = (showAddButton: boolean) =>
+		showAddButton && (
+			<span>
+				<ConviTabPlusButton
+					onClick={() => {
+						// assertion 사용 근거 : showAddButton이 onAdd !== undefined로만 넘겨줄 것이기 때문.
+						onAdd!();
+						onSelected(children.length);
+					}}
+				/>
+			</span>
+		);
+
 	return (
 		<ConviTabStyle>
-			<div style={{ display: 'flex' }}>
-				<div ref={headerRef}>
-					{open && <ArrowButton headerRef={headerRef.current} />}
+			<div className="header">
+				<div className="tabList" ref={headerRef} onScroll={e => setScrollLocation(e.currentTarget.scrollLeft)}>
+					{renderScrollButton(open)}
 					{children.map((child: React.ReactElement<ConviTabElementProps>, tabIndex: number) => (
 						<ConviTabHeaderElement
 							ref={el => {
@@ -197,8 +166,8 @@ export const ConviTab: React.FC<ConviTabProps> = props => {
 							ableChangeTitle={ableChangeTitle}
 							draggableTab={draggableTab}
 							onTabTitleChange={(newTitle: string) => handleTabTitleChange(newTitle, tabIndex, children)}
-							onHeaderDrag={(e: any) => handleDrag(tabIndex, e)}
-							onHeaderDragEnd={(e: any) => handleDragEnd(tabIndex, e)}
+							onHeaderDrag={(e: React.DragEvent<HTMLSpanElement>) => handleDrag(tabIndex, e)}
+							onHeaderDragEnd={(e: React.DragEvent<HTMLSpanElement>) => handleDragEnd(tabIndex, e)}
 							onSelected={(index: number) => onSelected(index)}
 							onClose={() => {
 								onSelected(selected - 1 || selected + 1);
@@ -209,17 +178,7 @@ export const ConviTab: React.FC<ConviTabProps> = props => {
 						</ConviTabHeaderElement>
 					))}
 				</div>
-				{onAdd && (
-					<span>
-						<ConviTabPlusButton
-							style={{ height: '100%', textAlign: 'center', justifyContent: 'center', backgroundColor: '#EAEAEB' }}
-							onClick={() => {
-								onAdd();
-								onSelected(children.length);
-							}}
-						/>
-					</span>
-				)}
+				{renderAddButton(onAdd !== undefined)}
 			</div>
 			{!forceRender
 				? children.map((child, index) => (
@@ -242,7 +201,7 @@ ConviTab.defaultProps = {
 	ableChangeTitle: false,
 	forceRender: false,
 	draggableTab: true,
-	onAdd: () => 0,
+	onAdd: undefined,
 };
 
 export default ConviTab;
