@@ -31,6 +31,7 @@ export const ConviTabHeaderElementStyle = styled.span<{ selected: boolean }>`
 	border-top-right-radius: 10px;
 	cursor: pointer;
 	background-color: ${props => (props.selected ? 'white' : '#E5E7Eb')};
+	min-width: 5%;
 	max-width: 8%;
 `;
 
