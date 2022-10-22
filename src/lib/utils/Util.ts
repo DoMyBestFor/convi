@@ -31,3 +31,13 @@ export const swapArrayElement = (array: Array<unknown>, idx1: number, idx2: numb
 	}
 	return resArr;
 };
+
+export const getPadding = (open: boolean) => {
+	let paddingLeft = 0;
+	let paddingRight = 0;
+	if (open) {
+		paddingLeft += 20;
+		paddingRight += 20;
+	}
+	return `0 ${paddingRight}px 0 ${paddingLeft}px`;
+};

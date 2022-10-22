@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import React, { useEffect, useRef, useState } from 'react';
 import { ConviTabHeaderElement } from './ConviTabHeaderElement';
 import { ConviTabElement, ConviTabElementProps } from './ConviTabElement';
-import { swapArrayElement } from '../utils/Util';
+import { getPadding, swapArrayElement } from '../utils/Util';
 import { ConviTabPlusButton } from './ConviTabPlusButton';
 import { ConviTabStyle } from '../style/ConviTabStyle';
 import { ConviTabScrollButton } from './ConviTabScrollButton';
@@ -26,16 +26,6 @@ export interface ElementPosition {
 	rec: DOMRect;
 	moved?: number;
 }
-
-const getPadding = (open: boolean) => {
-	let paddingLeft = 0;
-	let paddingRight = 0;
-	if (open) {
-		paddingLeft += 20;
-		paddingRight += 20;
-	}
-	return `0 ${paddingRight}px 0 ${paddingLeft}px`;
-};
 
 export const ConviTab: React.FC<ConviTabProps> = props => {
 	const {
