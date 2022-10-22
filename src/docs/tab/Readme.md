@@ -9,6 +9,7 @@ ConviTab에서 제공하는 대표적인 기능은 다음과 같다.
 * Tab remove
 * Add Tab
 * Uncontrolled / Controlled Tab
+* Scroll Button
 
 ### Sample Code & Demo
 준비중
@@ -24,7 +25,7 @@ ConviTab에서 제공하는 대표적인 기능은 다음과 같다.
 |onClose|<div style='color: purple'>(index: number) => void</div>|Tab을 삭제하기 위해 실행될 이벤트 핸들러|
 |onTabPositionChange|<div style='color: purple'>(currentTabs: React.ReactElement\<ConviTabElementProps>[]) => void</div>|Drag 시 변경된 tab element들을 재정렬 시켜줄 이벤트 핸들러
 |onSelected|<div style='color: purple'>(index: number) => void</div>|선택된 tab의 상태를 변경시켜줄 이벤트 핸들러
-|onAdd|<div style='color: purple'>() => boolean</div>|해당 props 전달 시 + 버튼이 나타나고 + 버튼을 클릭 했을 때 tab을 추가하는 로직이 담긴 이벤트 핸들러, Add 기능을 활용하기 위해서는 true를 리턴해야 함.
+|onAdd?|<div style='color: purple'>() => boolean</div>|해당 props 전달 시 + 버튼이 나타나고 + 버튼을 클릭 했을 때 tab을 추가하는 로직이 담긴 이벤트 핸들러, Add 기능을 활용하기 위해서는 true를 리턴해야 함.
 
 ### Uncontrolled Tab Props
 | `name` | `type` | `desc` |
