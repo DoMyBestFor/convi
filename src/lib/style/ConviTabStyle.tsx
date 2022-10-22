@@ -23,6 +23,7 @@ export const ConviTabStyle = styled.div`
 export const ConviTabHeaderElementStyle = styled.span<{ selected: boolean }>`
 	display: flex;
 	gap: 3px;
+	height: '100%';
 	margin-top: auto;
 	padding-left: 10px;
 	padding-right: 10px;
@@ -31,7 +32,6 @@ export const ConviTabHeaderElementStyle = styled.span<{ selected: boolean }>`
 	border-top-right-radius: 10px;
 	cursor: pointer;
 	background-color: ${props => (props.selected ? 'white' : '#E5E7Eb')};
-	min-width: 5%;
 	max-width: 8%;
 `;
 
