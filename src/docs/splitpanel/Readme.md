@@ -1,5 +1,5 @@
 ## SplitPanel
-Convi의 SplitPanel 컴포넌트
+SplitPanel
 
 ### Function
 * Split Multiple Components V
@@ -9,7 +9,7 @@ Convi의 SplitPanel 컴포넌트
 * Maximize / Minimize X
 
 ### Sample Code & Demo
-준비중
+Soon
 
 ### Props
 | `name` | `type` | `desc` |

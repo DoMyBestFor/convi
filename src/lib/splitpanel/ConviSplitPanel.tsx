@@ -3,6 +3,11 @@ import React, { HTMLAttributes } from 'react';
 import { ConviSplitPanelItem } from './ConviSplitPanelItem';
 import { ConviSplitPanelStyle } from '../style/ConviSplitPanelStyle';
 
+// TODO
+// 1. hover 상태 css 추가
+// 2. min / max size 설정 추가
+// 3. init size / ratio 설정 추가
+
 export interface ConviSplitPanelProp extends HTMLAttributes<HTMLDivElement> {
 	initialSizes?: { [key: number]: number };
 	children: React.ReactNode[];
