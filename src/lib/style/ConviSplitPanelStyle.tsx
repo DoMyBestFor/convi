@@ -13,14 +13,12 @@ export const ConviSplitPanelStyle = styled.div<{ dir: 'col' | 'row' }>`
 `;
 
 export const ConviSplitPanelItemStyle = styled.div<{
-	grow: boolean;
-	size?: number;
-	dir?: 'col' | 'row';
+	size: number;
+	dir: 'col' | 'row';
 }>`
 	background-color: beige;
 	height: ${props => props.dir === 'col' && `${props.size}px`};
 	width: ${props => props.dir === 'row' && `${props.size}px`};
-	flex-grow: ${props => props.grow && 1};
 `;
 
 export const ConviSplitPanelResizerStyle = styled.div<{ dir: 'col' | 'row' }>`
