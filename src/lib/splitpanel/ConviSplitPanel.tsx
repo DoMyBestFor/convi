@@ -10,12 +10,13 @@ import { ConviSplitPanelResizerStyle, ConviSplitPanelStyle } from '../style/Conv
 
 export interface ConviSplitPanelProp extends HTMLAttributes<HTMLDivElement> {
 	children: React.ReactNode[];
+	resizerThickness?: number;
 	dir?: 'col' | 'row';
 }
 
 export const ConviSplitPanel: React.FC<ConviSplitPanelProp> = (props: ConviSplitPanelProp) => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const { children, dir = 'col', ...divProps } = props;
+	const { children, dir = 'col', resizerThickness = 2, ...divProps } = props;
 
 	const itemRefs = useRef<any[]>([]);
 	const paneRefs = useRef<DOMRect[]>([]);
@@ -35,32 +36,27 @@ export const ConviSplitPanel: React.FC<ConviSplitPanelProp> = (props: ConviSplit
 
 		const copySizes = sizes.slice();
 
-		const resizerSize = 2;
+		const resizerSize = resizerThickness * (children.length - 1);
 		const maxSize =
 			dir === 'col' ? first.height + second.height - resizerSize : first.width + second.width - resizerSize;
-		const minSize = 2;
+		const minSize = 0;
 
-		const move = m.clientY - startPos.current;
+		const move = dir === 'col' ? m.clientY - startPos.current : m.clientX - startPos.current;
 
 		copySizes[resizerIndex.current - 1] += move;
 		copySizes[resizerIndex.current] -= move;
 
-		// console.log(sizes.current[resizerIndex - 1]);
-		// console.log(sizes.current[resizerIndex]);
-
 		if (copySizes[resizerIndex.current - 1] > maxSize) {
 			copySizes[resizerIndex.current - 1] = maxSize;
 			copySizes[resizerIndex.current] = minSize;
-		}
-		if (copySizes[resizerIndex.current - 1] < minSize) {
+		} else if (copySizes[resizerIndex.current - 1] < minSize) {
 			copySizes[resizerIndex.current - 1] = minSize;
 			copySizes[resizerIndex.current] = maxSize;
 		}
 		if (copySizes[resizerIndex.current] > maxSize) {
 			copySizes[resizerIndex.current] = maxSize;
 			copySizes[resizerIndex.current - 1] = minSize;
-		}
-		if (copySizes[resizerIndex.current] < minSize) {
+		} else if (copySizes[resizerIndex.current] < minSize) {
 			copySizes[resizerIndex.current] = minSize;
 			copySizes[resizerIndex.current - 1] = maxSize;
 		}
@@ -78,7 +74,7 @@ export const ConviSplitPanel: React.FC<ConviSplitPanelProp> = (props: ConviSplit
 	const handleMouseDown = (e: React.MouseEvent, resizer: number) => {
 		if (e.button !== 0) return;
 		e.preventDefault();
-		// console.log(resizer);
+		paneRefs.current = itemRefs.current.map(item => item.getBoundingClientRect());
 		resizerIndex.current = resizer; // set resizer
 		startPos.current = dir === 'col' ? e.clientY : e.clientX;
 
@@ -102,7 +98,11 @@ export const ConviSplitPanel: React.FC<ConviSplitPanelProp> = (props: ConviSplit
 						{child}
 					</ConviSplitPanelItem>
 					{index !== children.length - 1 && (
-						<ConviSplitPanelResizerStyle dir={dir} onMouseDown={e => handleMouseDown(e, index + 1)} />
+						<ConviSplitPanelResizerStyle
+							dir={dir}
+							resizerThickness={resizerThickness}
+							onMouseDown={e => handleMouseDown(e, index + 1)}
+						/>
 					)}
 				</>
 			))}
@@ -112,6 +112,7 @@ export const ConviSplitPanel: React.FC<ConviSplitPanelProp> = (props: ConviSplit
 
 ConviSplitPanel.defaultProps = {
 	dir: 'col',
+	resizerThickness: 2,
 };
 
 export default ConviSplitPanel;
