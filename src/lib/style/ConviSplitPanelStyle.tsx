@@ -21,9 +21,9 @@ export const ConviSplitPanelItemStyle = styled.div<{
 	width: ${props => props.dir === 'row' && `${props.size}px`};
 `;
 
-export const ConviSplitPanelResizerStyle = styled.div<{ dir: 'col' | 'row' }>`
+export const ConviSplitPanelResizerStyle = styled.div<{ dir: 'col' | 'row'; resizerThickness: number }>`
 	background-color: gray;
-	width: ${props => props.dir !== 'col' && '0.15rem'};
-	height: ${props => props.dir === 'col' && '0.15rem'};
+	width: ${props => props.dir !== 'col' && `${props.resizerThickness}px`};
+	height: ${props => props.dir === 'col' && `${props.resizerThickness}px`};
 	cursor: ${props => (props.dir === 'col' ? 'ns-resize' : 'ew-resize')};
 `;
