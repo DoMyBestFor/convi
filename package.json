@@ -1,6 +1,6 @@
 {
   "name": "convi",
-  "version": "0.2.9",
+  "version": "0.2.10",
   "private": false,
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -39,14 +39,8 @@
     "react-scripts": "5.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
     "prepare": "rm -rf dist && mkdir dist && tsc",
-    "lint": "eslint ./src/**/*.{ts,tsx,js,jsx}",
-    "lint:fix": "eslint --fix ./src/**/*.{ts,tsx,js,jsx}",
-    "prettier": "prettier --write ./src/**/*.{ts,tsx}",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
