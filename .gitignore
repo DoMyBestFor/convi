@@ -13,9 +13,9 @@
 dist
 
 # test
-react-app-env.d.test
-reportWebVitals.test
-setupTests.ts
+src/react-app-env.d.test
+src/reportWebVitals.test
+src/setupTests.ts
 
 # misc
 .DS_Store

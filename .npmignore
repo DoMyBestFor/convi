@@ -2,6 +2,13 @@ src/
 stories/
 node_modules/
 
-react-app-env.d.ts
-reportWebVitals.ts
-setupTests.ts
+src/react-app-env.d.ts
+src/reportWebVitals.ts
+src/setupTests.ts
+
+src/docs/
+
+yarn.lock
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
