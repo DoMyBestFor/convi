@@ -10,6 +10,12 @@
 
 # production
 /build
+dist
+
+# test
+react-app-env.d.test
+reportWebVitals.test
+setupTests.ts
 
 # misc
 .DS_Store
