@@ -1,5 +1,5 @@
 {
-  "name": "convi-migration",
+  "name": "convi",
   "version": "0.2.5",
   "private": false,
   "main": "dist/index.js",
@@ -36,8 +36,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
     "@types/node": "^16.11.56",
-    "react-scripts": "5.0.1",
-    "typescript": "^4.8.2"
+    "react-scripts": "5.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -76,8 +75,8 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "typescript": "^4.8.2",
     "@babel/core": "^7.19.6",
-    "@babel/preset-react": "^7.18.6",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@storybook/addon-actions": "^6.5.13",
