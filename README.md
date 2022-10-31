@@ -10,6 +10,6 @@ Soon!
 ## Docs
 |`component`|`docs`|
 |---|---|
-|`Modal`|[Modal Docs](https://github.com/DoMyBestFor/convi/tree/master/src/docs/modal)
-|`Tab`|[Tab Docs](https://github.com/DoMyBestFor/convi/tree/master/src/docs/tab)
-|`SplitPanel`|[SplitPanel Docs](https://github.com/DoMyBestFor/convi/tree/master/src/docs/splitpanel)
+|`Modal`|[Modal Docs](https://github.com/DoMyBestFor/convi/tree/main/src/docs/modal)
+|`Tab`|[Tab Docs](https://github.com/DoMyBestFor/convi/tree/main/src/docs/tab)
+|`SplitPanel`|[SplitPanel Docs](https://github.com/DoMyBestFor/convi/tree/main/src/docs/splitpanel)
