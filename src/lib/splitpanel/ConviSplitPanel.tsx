@@ -9,11 +9,23 @@ import { ConviSplitPanelResizerStyle, ConviSplitPanelStyle } from '../style/Conv
 // 3. init size / ratio 설정 추가
 
 export interface ConviSplitPanelProp extends HTMLAttributes<HTMLDivElement> {
+	/**
+	 * Splited Components ( >= 2)
+	 */
 	children: React.ReactElement<ConviSplitPanelItemProp>[];
+	/**
+	 * resizer thickness (px)
+	 */
 	resizerThickness?: number;
+	/**
+	 * split direction
+	 */
 	dir?: 'col' | 'row';
 }
 
+/**
+ * SplitPanel Component
+ */
 export const ConviSplitPanel: React.FC<ConviSplitPanelProp> = (props: ConviSplitPanelProp) => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const { children, dir = 'col', resizerThickness = 2, ...divProps } = props;
@@ -125,6 +137,7 @@ export const ConviSplitPanel: React.FC<ConviSplitPanelProp> = (props: ConviSplit
 						size={sizes[index]}
 						key={`${dir}-${1 * index}`}
 						dir={dir}
+						isGrow={children.length - 1 === index}
 					>
 						{child}
 					</ConviSplitPanelItem>

@@ -15,6 +15,7 @@ export const ConviSplitPanelItemStyle = styled.div<{
 	size?: number;
 	minSize: number;
 	maxSize: number;
+	isGrow: boolean;
 	dir: 'col' | 'row';
 }>`
 	background-color: beige;
@@ -24,6 +25,7 @@ export const ConviSplitPanelItemStyle = styled.div<{
 	max-width: ${props => (props.dir === 'row' && props.maxSize === Infinity ? 'none' : `${props.maxSize}px`)};
 	min-height: ${props => props.dir === 'col' && `${props.minSize}px`};
 	min-width: ${props => props.dir === 'row' && `${props.minSize}px`};
+	flex-grow: ${props => (props.isGrow ? 1 : 0)};
 `;
 
 export const ConviSplitPanelResizerStyle = styled.div<{ dir: 'col' | 'row'; resizerThickness: number }>`

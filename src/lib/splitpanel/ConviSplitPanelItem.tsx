@@ -3,6 +3,7 @@ import { ConviSplitPanelItemStyle } from '../style/ConviSplitPanelStyle';
 
 export interface ConviSplitPanelItemProp {
 	children: React.ReactNode;
+	isGrow?: boolean;
 	// eslint-disable-next-line react/require-default-props
 	size?: number;
 	// eslint-disable-next-line react/require-default-props
@@ -14,12 +15,12 @@ export interface ConviSplitPanelItemProp {
 
 export const ConviSplitPanelItem = forwardRef<React.ReactElement<ConviSplitPanelItemProp>, ConviSplitPanelItemProp>(
 	(props: ConviSplitPanelItemProp, ref: any) => {
-		const { children, dir = 'col', size, maxSize = Infinity, minSize = 0, initialSize } = props;
+		const { children, dir = 'col', size, maxSize = Infinity, minSize = 0, initialSize, isGrow = false } = props;
 
 		const itemSize = size !== undefined ? size : initialSize; // size가 0일 수도 있음.
 
 		return (
-			<ConviSplitPanelItemStyle ref={ref} dir={dir} size={itemSize} maxSize={maxSize} minSize={minSize}>
+			<ConviSplitPanelItemStyle ref={ref} isGrow={isGrow} dir={dir} size={itemSize} maxSize={maxSize} minSize={minSize}>
 				{children}
 			</ConviSplitPanelItemStyle>
 		);
@@ -30,6 +31,7 @@ ConviSplitPanelItem.defaultProps = {
 	dir: 'col',
 	maxSize: Infinity,
 	minSize: 0,
+	isGrow: false,
 };
 
 export default ConviSplitPanelItem;
