@@ -10,7 +10,7 @@
 
 # production
 /build
-dist
+dist/*
 
 # test
 src/react-app-env.d.test
