@@ -1,6 +1,7 @@
 src/
 stories/
 node_modules/
+storybook-static/
 
 src/react-app-env.d.ts
 src/reportWebVitals.ts
