@@ -5,7 +5,10 @@ Easy-to-use ui library.
 yarn add convi
 
 ## Demo
-Soon!
+[Demo Page](https://voluble-halva-4ebc2f.netlify.app/)
+SplitPanel ✅
+Modal ❌
+Tab ❌
 
 ## Docs
 |`component`|`docs`|
