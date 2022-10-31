@@ -2,7 +2,6 @@ import styled from '@emotion/styled';
 
 export const ConviSplitPanelStyle = styled.div<{ dir: 'col' | 'row' }>`
 	display: flex;
-	position: absolute;
 	outline: none;
 	overflow: hidden;
 	user-select: text;
