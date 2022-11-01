@@ -30,12 +30,15 @@ MultiSplit.args = {
 
 export const NestedSplit = Template.bind({});
 NestedSplit.args = {
+	dir: 'col',
 	children: [
 		<SplitPanelItem initialSize={50}>test1</SplitPanelItem>,
-		<SplitPanel dir="row">
-			<SplitPanelItem initialSize={200}>test2</SplitPanelItem>
-			<SplitPanelItem initialSize={50}>test3</SplitPanelItem>
-		</SplitPanel>,
+		<SplitPanelItem>
+			<SplitPanel dir="row">
+				<SplitPanelItem initialSize={50}>test2</SplitPanelItem>
+				<SplitPanelItem initialSize={50}>test3</SplitPanelItem>
+			</SplitPanel>
+		</SplitPanelItem>,
 	],
 };
 
