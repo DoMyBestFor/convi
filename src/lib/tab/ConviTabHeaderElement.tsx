@@ -21,7 +21,7 @@ export interface ConviTabHeaderElementProps {
 }
 
 // Custom Hooks
-const useTabTitles = (title: string, onTabTitleChange: (newTitle: string) => void, ableChangeTitle?: boolean) => {
+const useTabTitles = (title: string, onTabTitleChange: (newTitle: string) => void, ableChangeTitle: boolean) => {
 	const [editMode, setEditMode] = useState<boolean>(false);
 	const [tabTitle, setTabTitle] = useState<string>(title);
 
@@ -69,11 +69,11 @@ export const ConviTabHeaderElement = forwardRef<
 		index,
 		selected,
 		onTabTitleChange,
-		fixed,
+		fixed = false,
 		onClose,
-		ableChangeTitle,
-		draggableTab,
-		icon,
+		ableChangeTitle = false,
+		draggableTab = false,
+		icon = undefined,
 		onHeaderDrag,
 		onHeaderDragEnd,
 	} = props;
