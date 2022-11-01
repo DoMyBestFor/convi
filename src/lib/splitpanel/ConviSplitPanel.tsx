@@ -128,9 +128,11 @@ export const ConviSplitPanel: React.FC<ConviSplitPanelProp> = (props: ConviSplit
 	return (
 		// eslint-disable-next-line react/jsx-props-no-spreading
 		<ConviSplitPanelStyle dir={dir} {...divProps}>
-			{children.map((child: React.ReactNode, index: number) => (
+			{children.map((child: React.ReactElement<ConviSplitPanelItemProp>, index: number) => (
 				<>
 					<ConviSplitPanelItem
+						// eslint-disable-next-line react/jsx-props-no-spreading
+						{...child.props}
 						ref={el => {
 							itemRefs.current[index] = el;
 						}}
@@ -139,7 +141,7 @@ export const ConviSplitPanel: React.FC<ConviSplitPanelProp> = (props: ConviSplit
 						dir={dir}
 						isGrow={children.length - 1 === index}
 					>
-						{child}
+						{child.props.children}
 					</ConviSplitPanelItem>
 					{index !== children.length - 1 && (
 						<ConviSplitPanelResizerStyle

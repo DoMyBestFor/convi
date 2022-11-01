@@ -18,7 +18,6 @@ export const ConviSplitPanelItemStyle = styled.div<{
 	isGrow: boolean;
 	dir: 'col' | 'row';
 }>`
-	background-color: beige;
 	height: ${props => props.dir === 'col' && props.size && `${props.size}px`};
 	width: ${props => props.dir === 'row' && props.size && `${props.size}px`};
 	max-height: ${props => (props.dir === 'col' && props.maxSize === Infinity ? 'none' : `${props.maxSize}px`)};
