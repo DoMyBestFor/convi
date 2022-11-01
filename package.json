@@ -1,6 +1,6 @@
 {
   "name": "convi",
-  "version": "0.2.13",
+  "version": "0.2.14",
   "private": false,
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -9,6 +9,7 @@
     "ui",
     "emotion",
     "tab",
+    "demo",
     "modal",
     "react",
     "splitpanel",
@@ -36,14 +37,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
     "@types/node": "^16.11.56",
-    "react-scripts": "5.0.1",
-    "@types/react": "^18.0.18",
-    "@types/react-dom": "^18.0.6",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "@storybook/addon-essentials": "^6.5.13",
-    "@storybook/addon-interactions": "^6.5.13",
-    "@storybook/addon-links": "^6.5.13"
+    "react-scripts": "5.0.1"
   },
   "scripts": {
     "test": "react-scripts test",
