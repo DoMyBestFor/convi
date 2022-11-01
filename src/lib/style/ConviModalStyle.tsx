@@ -3,8 +3,6 @@ import { css } from '@emotion/react';
 
 interface ConviModalStyleProps {
 	open: boolean;
-	width?: string;
-	height?: string;
 }
 
 export const ConviModalStyle = styled.div<ConviModalStyleProps>`
@@ -25,6 +23,7 @@ export const ConviModalStyle = styled.div<ConviModalStyleProps>`
 		width: 100vw;
 		height: 100vh;
 		z-index: 10;
+		filter: blur(300px);
 		background-color: gray;
 		opacity: 50;
 		top: 0;
@@ -44,8 +43,7 @@ export const ConviModalStyle = styled.div<ConviModalStyleProps>`
 		max-height: 80%;
 		min-width: 30%;
 		min-height: 30%;
-		width: ${props => props.width};
-		height: ${props => props.height};
+		overflow: auto;
 	}
 `;
 
