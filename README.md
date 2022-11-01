@@ -1,14 +1,19 @@
 # Convi
-Easy-to-use ui library.
+Easy-to-use react ui library.
 
 ## Start
-yarn add convi
+> * React 18.0.18 >=
+> * React-DOM 18.0.6 >=
+
+`yarn add convi`
+
+`import Component from 'convi'`
 
 ## Demo
-[Demo Page](https://voluble-halva-4ebc2f.netlify.app/)
-SplitPanel ✅
-Modal ❌
-Tab ❌
+[Demo Page](https://voluble-halva-4ebc2f.netlify.app/) <br />
+* SplitPanel ✅
+* Modal ❌ 
+* Tab ❌ 
 
 ## Docs
 |`component`|`docs`|
