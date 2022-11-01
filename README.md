@@ -12,7 +12,7 @@ Easy-to-use react ui library.
 ## Demo
 [Demo Page](https://voluble-halva-4ebc2f.netlify.app/) <br />
 * SplitPanel ✅
-* Modal ❌ 
+* Modal ✅
 * Tab ❌ 
 
 ## Docs
