@@ -6,7 +6,7 @@ import { SplitPanel, SplitPanelItem } from '../../src/lib';
 export default {
 	title: 'SplitPanel',
 	component: SplitPanel,
-	decorators: [story => <div style={{ width: '250px', height: '250px' }}>{story()}</div>],
+	decorators: [story => <div style={{ width: '250px', height: '250px', border: '1px solid black' }}>{story()}</div>],
 } as ComponentMeta<typeof SplitPanel>;
 
 const Template: ComponentStory<typeof SplitPanel> = args => <SplitPanel {...args} />;
