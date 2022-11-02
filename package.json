@@ -6,15 +6,13 @@
   "types": "dist/index.d.ts",
   "browser": "./browser/specific/main.js",
   "keywords": [
-    "ui",
-    "emotion",
     "tab",
-    "demo",
     "modal",
-    "react",
     "splitpanel",
+    "react-ui",
     "component",
-    "reusable"
+    "reusable",
+    "front-end"
   ],
   "homepage": "https://github.com/DoMyBestFor/convi",
   "bugs": {
