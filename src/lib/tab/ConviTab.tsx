@@ -10,14 +10,41 @@ import { ConviTabScrollButton } from './ConviTabScrollButton';
 
 // Type
 export interface ConviTabProps {
+	/**
+	 * selected tab index
+	 */
 	selected: number;
+	/**
+	 * able to change tab title
+	 */
 	ableChangeTitle?: boolean;
+	/**
+	 * If tab move, rerender?
+	 */
 	forceRender?: boolean;
+	/**
+	 * draggable tab header
+	 */
 	draggableTab?: boolean;
+	/**
+	 * tab Elements
+	 */
 	children: React.ReactElement<ConviTabElementProps>[];
+	/**
+	 * remove tab
+	 */
 	onClose: (index: number) => void;
+	/**
+	 * tab position change handler
+	 */
 	onTabPositionChange: (currentTabs: React.ReactElement<ConviTabElementProps>[]) => void;
+	/**
+	 * selected handler
+	 */
 	onSelected: (index: number) => void;
+	/**
+	 * add tab
+	 */
 	onAdd?: () => void;
 }
 
