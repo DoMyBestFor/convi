@@ -3,9 +3,9 @@ import { css } from '@emotion/react';
 import React, { useEffect, useRef, useState } from 'react';
 import { ConviTabHeaderElement } from './ConviTabHeaderElement';
 import { ConviTabElement, ConviTabElementProps } from './ConviTabElement';
-import { getPadding, swapArrayElement } from '../utils/Util';
+import { getPadding, swapArrayElement } from '../../utils/Util';
 import { ConviTabPlusButton } from './ConviTabPlusButton';
-import { ConviTabStyle } from '../style/ConviTabStyle';
+import { ConviTabStyle } from '../../style/ConviTabStyle';
 import { ConviTabScrollButton } from './ConviTabScrollButton';
 
 // Type

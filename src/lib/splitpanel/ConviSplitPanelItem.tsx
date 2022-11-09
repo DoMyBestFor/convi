@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import { ConviSplitPanelItemStyle } from '../style/ConviSplitPanelStyle';
+import { ConviSplitPanelItemStyle } from '../../style/ConviSplitPanelStyle';
 
 export interface ConviSplitPanelItemProp {
 	children: React.ReactNode;

@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import React, { useState } from 'react';
 import { ConviTabHeaderElement } from './ConviTabHeaderElement';
 import { ConviTabElementProps } from './ConviTabElement';
-import { ConviTabStyle } from '../style/ConviTabStyle';
+import { ConviTabStyle } from '../../style/ConviTabStyle';
 
 // Type
 export interface ConviUncontrolledTabProps {

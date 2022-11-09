@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React, { HTMLAttributes, ReactNode } from 'react';
 import { ConviModalCloseButton } from './ConviModalCloseButton';
-import { ConviModalStyle, ConviModalTitle } from '../style/ConviModalStyle';
+import { ConviModalStyle, ConviModalTitle } from '../../style/ConviModalStyle';
 
 export interface ConviModalProps extends HTMLAttributes<HTMLDivElement> {
 	/**

@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import React, { forwardRef, useEffect, useState } from 'react';
-import { ConviTabHeaderElementStyle, editStyle, nonEditStyle } from '../style/ConviTabStyle';
+import { ConviTabHeaderElementStyle, editStyle, nonEditStyle } from '../../style/ConviTabStyle';
 import { ConviTabCloseButton } from './ConviTabCloseButton';
 
 // Types

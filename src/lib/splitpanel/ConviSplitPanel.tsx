@@ -1,7 +1,7 @@
 import React, { HTMLAttributes, useEffect, useRef, useState } from 'react';
 
 import { ConviSplitPanelItem, ConviSplitPanelItemProp } from './ConviSplitPanelItem';
-import { ConviSplitPanelResizerStyle, ConviSplitPanelStyle } from '../style/ConviSplitPanelStyle';
+import { ConviSplitPanelResizerStyle, ConviSplitPanelStyle } from '../../style/ConviSplitPanelStyle';
 
 // TODO
 // 1. hover 상태 css 추가

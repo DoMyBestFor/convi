@@ -7,8 +7,6 @@ src/react-app-env.d.ts
 src/reportWebVitals.ts
 src/setupTests.ts
 
-src/docs/
-
 package-lock.json
 yarn.lock
 npm-debug.log*
