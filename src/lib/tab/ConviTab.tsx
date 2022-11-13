@@ -151,8 +151,11 @@ export const ConviTab: React.FC<ConviTabProps> = props => {
 		onTabPositionChange(newTabs);
 	};
 
+	// scroll arrow button
 	const renderScrollButton = (showScrollButton: boolean) =>
 		showScrollButton && <ConviTabScrollButton headerElement={headerRef.current} scrollLocation={scrollLocation} />;
+
+	// add button
 	const renderAddButton = (showAddButton: boolean) =>
 		showAddButton && (
 			<span>
