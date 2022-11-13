@@ -1,38 +1,45 @@
 import { css } from '@emotion/react';
-import styled from '@emotion/styled';
+import { theme } from './global/theme';
 
-export const ConviTabStyle = styled.div`
-	.header {
-		display: flex;
-		height: 25px;
-	}
-
-	.tabList {
-		display: flex;
-		text-align: left;
-		background-color: lightgray;
-		position: relative;
-		white-space: nowrap;
-		overflow: hidden;
-		width: 100%;
-		z-index: 100;
-		scroll-behavior: smooth;
-	}
+export const tabHeader = css`
+	display: flex;
+	height: 25px;
 `;
 
-export const ConviTabHeaderElementStyle = styled.span<{ selected: boolean }>`
+export const tabList = css`
 	display: flex;
-	gap: 3px;
+	text-align: left;
+	background-color: ${theme.colors['gray-300']};
+	position: relative;
+	white-space: nowrap;
+	overflow: hidden;
+	width: 100%;
+	z-index: 100;
+	scroll-behavior: smooth;
+`;
+
+export const tabHeaderElement = (selected: boolean) => css`
+	display: flex;
 	height: '100%';
 	margin-top: auto;
 	padding-left: 10px;
 	padding-right: 10px;
 	margin-right: 5px;
+	gap: 3px;
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
 	cursor: pointer;
-	background-color: ${props => (props.selected ? 'white' : '#E5E7Eb')};
-	max-width: 8%;
+	background-color: ${selected ? theme.colors.white : theme.colors['gray-400']};
+	max-width: 10%;
+`;
+
+export const selectedStyle = (selected: boolean) => css`
+	display: ${selected ? 'inline' : 'none'};
+`;
+
+export const iconStyle = css`
+	margin-top: auto;
+	margin-bottom: auto;
 `;
 
 export const editStyle = css`

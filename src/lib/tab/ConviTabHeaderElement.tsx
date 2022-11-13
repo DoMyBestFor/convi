@@ -1,7 +1,9 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/mouse-events-have-key-events */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
 import React, { forwardRef, useEffect, useState } from 'react';
-import { ConviTabHeaderElementStyle, editStyle, nonEditStyle } from '../../style/ConviTabStyle';
+import { editStyle, iconStyle, nonEditStyle, tabHeaderElement } from '../../style/ConviTabStyle';
 import { ConviTabCloseButton } from './ConviTabCloseButton';
 
 // Types
@@ -10,8 +12,8 @@ export interface ConviTabHeaderElementProps {
 	selected: boolean;
 	index: number;
 	onTabTitleChange: (newTitle: string) => void;
-	onHeaderDrag: (e: any) => void;
-	onHeaderDragEnd: (e: any) => void;
+	onHeaderDrag: (e: React.DragEvent<HTMLSpanElement>) => void;
+	onHeaderDragEnd: (e: React.DragEvent<HTMLSpanElement>) => void;
 	draggableTab?: boolean;
 	ableChangeTitle?: boolean;
 	icon?: React.ReactElement;
@@ -38,7 +40,6 @@ const useTabTitles = (title: string, onTabTitleChange: (newTitle: string) => voi
 				<input
 					css={editStyle}
 					value={tabTitle}
-					autoFocus
 					onChange={handleChange}
 					onBlur={e => {
 						onTabTitleChange(e.target.value);
@@ -87,28 +88,20 @@ export const ConviTabHeaderElement = forwardRef<
 	const handleMouseOut = () => setDisplayCloseButton(false);
 
 	return (
-		<ConviTabHeaderElementStyle
-			// eslint-disable-next-line react/jsx-props-no-spreading
+		<span
+			css={tabHeaderElement(selected)}
 			ref={ref}
 			draggable={draggableTab}
-			selected={selected}
 			onDrag={e => onHeaderDrag(e)}
 			onDragEnd={e => onHeaderDragEnd(e)}
 			onClick={handleClick}
 			onMouseOver={handleMouseOver}
 			onMouseOut={handleMouseOut}
 		>
-			<span
-				css={css`
-					margin-top: auto;
-					margin-bottom: auto;
-				`}
-			>
-				{icon}
-			</span>
+			<span css={iconStyle}>{icon}</span>
 			{titleContent()}
 			{fixed || <ConviTabCloseButton displayCloseBtn={displayCloseButton} onClick={handleClose} />}
-		</ConviTabHeaderElementStyle>
+		</span>
 	);
 });
 

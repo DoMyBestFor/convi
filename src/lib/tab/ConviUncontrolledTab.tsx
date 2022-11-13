@@ -1,9 +1,8 @@
 /** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
 import React, { useState } from 'react';
 import { ConviTabHeaderElement } from './ConviTabHeaderElement';
 import { ConviTabElementProps } from './ConviTabElement';
-import { ConviTabStyle } from '../../style/ConviTabStyle';
+import { selectedStyle, tabHeader, tabHeaderElement, tabList } from '../../style/ConviTabStyle';
 
 // Type
 export interface ConviUncontrolledTabProps {
@@ -19,9 +18,9 @@ export const ConviUncontrolledTab: React.FC<ConviUncontrolledTabProps> = props =
 	const tabElements: React.ReactElement<ConviTabElementProps>[] = Array.isArray(children) ? children : [children];
 
 	return (
-		<ConviTabStyle>
-			<div className="header">
-				<div className="tabList">
+		<div>
+			<div css={tabHeader}>
+				<div css={tabList}>
 					{tabElements.map((child: React.ReactElement<ConviTabElementProps>, tabIndex: number) => (
 						<ConviTabHeaderElement
 							key={`${child.props.title}-${tabIndex * 1}`}
@@ -43,17 +42,12 @@ export const ConviUncontrolledTab: React.FC<ConviUncontrolledTabProps> = props =
 
 			{!forceRender
 				? tabElements.map((child, index) => (
-						<span
-							key={`${child.props.title}-${index * 1}`}
-							css={css`
-								display: ${selected === index ? 'inline' : 'none'};
-							`}
-						>
+						<span key={`${child.props.title}-${index * 1}`} css={selectedStyle(selected === index)}>
 							{child}
 						</span>
 				  ))
 				: tabElements[selected]}
-		</ConviTabStyle>
+		</div>
 	);
 };
 
