@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { SplitPanel, SplitPanelItem } from '../../src/lib';
+import { SplitPanel, SplitPanelItem } from '../../src/index';
 
 export default {
 	title: 'SplitPanel',

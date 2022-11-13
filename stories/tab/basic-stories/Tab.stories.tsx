@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { Tab, TabElement } from '../../../src/lib';
+import { Tab, TabElement } from '../../../src/index';
 import { Input } from '../Input';
 
 export default {

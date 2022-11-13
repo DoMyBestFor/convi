@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { TabElement, UncontrolledTab } from '../../src/lib';
+import { TabElement, UncontrolledTab } from '../../src/index';
 
 export default {
 	title: 'Uncontrolled Tab',

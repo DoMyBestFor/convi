@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Tab, TabElement } from '../../src/lib';
+import { Tab, TabElement } from '../../src/index';
 import { ConviTabProps } from '../../src/lib/tab/ConviTab';
 import { ConviTabElementProps } from '../../src/lib/tab/ConviTabElement';
 

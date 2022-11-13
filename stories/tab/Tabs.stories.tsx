@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { Tab } from '../../src/lib';
+import { Tab } from '../../src/index';
 import { TabPage } from './TabPage';
 import { AddTab, ArrowScrollTab, BasicTab, ChangeTitleTab, ForceRenderTab } from './basic-stories/Tab.stories';
 

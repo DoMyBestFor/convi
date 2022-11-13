@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal } from '../../src/lib';
+import { Modal } from '../../src/index';
 import { ConviModalProps } from '../../src/lib/modal/ConviModal';
 
 export interface BasicModalPageProps extends ConviModalProps {
