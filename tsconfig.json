@@ -19,6 +19,6 @@
     "jsx": "react-jsx",
     "removeComments": true
   },
-  "include": ["./src/lib/**/*.tsx", "./src/lib/**/*.ts"],
+  "include": ["./src/lib/**/*.tsx", "./src/lib/**/*.ts", "src/index.tsx"],
   "exclude": ["node_modules"]
 }
