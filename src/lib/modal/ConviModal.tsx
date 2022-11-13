@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React, { HTMLAttributes, ReactNode } from 'react';
 import { ConviModalCloseButton } from './ConviModalCloseButton';
-import { ConviModalStyle, ConviModalTitle } from '../../style/ConviModalStyle';
+import { modalBackdropStyle, modalContentStyle, modalStyle, modalTitleStyle } from '../../style/ConviModalStyle';
 
 export interface ConviModalProps extends HTMLAttributes<HTMLDivElement> {
 	/**
@@ -33,23 +33,22 @@ export interface ConviModalProps extends HTMLAttributes<HTMLDivElement> {
 export const ConviModal: React.FC<ConviModalProps> = props => {
 	const { open, onClose, modalTitle, children, preventBackdropClick, ...divProps } = props;
 	return (
-		// eslint-disable-next-line react/jsx-props-no-spreading
-		<ConviModalStyle open={open}>
+		<div css={modalStyle(open)}>
 			{
 				// eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/no-static-element-interactions, jsx-a11y/no-noninteractive-element-interactions
-				<div role="document" onMouseDown={() => !preventBackdropClick && onClose()} />
+				<div css={modalBackdropStyle} role="document" onMouseDown={() => !preventBackdropClick && onClose()} />
 			}
 			{
 				// eslint-disable-next-line react/jsx-props-no-spreading
-				<div {...divProps}>
-					<div css={ConviModalTitle}>
+				<div css={modalContentStyle} {...divProps}>
+					<div css={modalTitleStyle}>
 						{modalTitle}
 						<ConviModalCloseButton onClick={() => onClose()} />
 					</div>
 					{children}
 				</div>
 			}
-		</ConviModalStyle>
+		</div>
 	);
 };
 

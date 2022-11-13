@@ -1,12 +1,9 @@
-import styled from '@emotion/styled';
 import { css } from '@emotion/react';
+import { theme } from './global/theme';
+import { font } from './global/font';
 
-interface ConviModalStyleProps {
-	open: boolean;
-}
-
-export const ConviModalStyle = styled.div<ConviModalStyleProps>`
-	// Modal Global Style
+// modal global style
+export const modalStyle = (open: boolean) => css`
 	display: flex;
 	position: fixed;
 	width: 100vw;
@@ -15,42 +12,37 @@ export const ConviModalStyle = styled.div<ConviModalStyleProps>`
 	left: 0;
 	text-align: center;
 	justify-content: center;
-	visibility: ${props => (props.open ? 'visible' : 'hidden')};
-
-	// Backdrop Style
-	& > div:nth-child(1) {
-		position: fixed;
-		width: 100vw;
-		height: 100vh;
-		z-index: 10;
-		filter: blur(300px);
-		background-color: gray;
-		opacity: 50;
-		top: 0;
-		left: 0;
-	}
-
-	// Content Style
-	& > div:nth-child(2) {
-		padding-left: 8px;
-		padding-right: 8px;
-		padding-top: 6px;
-		padding-bottom: 6px;
-		z-index: 20;
-		background-color: white;
-		border: 2px solid gray;
-		max-width: 80%;
-		max-height: 80%;
-		min-width: 30%;
-		min-height: 30%;
-		overflow: auto;
-	}
+	visibility: ${open ? 'visible' : 'hidden'};
 `;
 
-export const ConviModalTitle = css`
+export const modalTitleStyle = css`
 	display: flex;
 	flex-direction: row;
-	border-bottom: 3px solid gray;
-	font-weight: bold;
+	border-bottom: 3px solid ${theme.colors['gray-300']};
 	margin-bottom: 10px;
+	${font.h4}
+`;
+
+export const modalBackdropStyle = css`
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	z-index: 10;
+	filter: blur(300px);
+	background-color: ${theme.colors['gray-500']};
+	opacity: 50;
+	top: 0;
+	left: 0;
+`;
+
+export const modalContentStyle = css`
+	padding: 6px 8px;
+	z-index: 20;
+	background-color: ${theme.colors.white};
+	border: 2px solid ${theme.colors['gray-300']};
+	max-width: 80%;
+	max-height: 80%;
+	min-width: 30%;
+	min-height: 30%;
+	overflow: auto;
 `;
