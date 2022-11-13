@@ -29,5 +29,10 @@ export const theme = Object.freeze({
 
 		// violet
 		violet: '#98109B',
+
+		// gray
+		'gray-300': '#DEDEDE',
+		'gray-400': '#C4C4C4',
+		'gray-500': '#B5B5B5',
 	},
 });
