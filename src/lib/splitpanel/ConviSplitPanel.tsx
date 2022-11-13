@@ -1,7 +1,8 @@
+/** @jsxImportSource @emotion/react */
 import React, { HTMLAttributes, useEffect, useRef, useState } from 'react';
+import { panel, resizer as resizerStyle } from '../../style/ConviSplitPanelStyle';
 
 import { ConviSplitPanelItem, ConviSplitPanelItemProp } from './ConviSplitPanelItem';
-import { ConviSplitPanelResizerStyle, ConviSplitPanelStyle } from '../../style/ConviSplitPanelStyle';
 
 // TODO
 // 1. hover 상태 css 추가
@@ -127,7 +128,7 @@ export const ConviSplitPanel: React.FC<ConviSplitPanelProp> = (props: ConviSplit
 
 	return (
 		// eslint-disable-next-line react/jsx-props-no-spreading
-		<ConviSplitPanelStyle dir={dir} {...divProps}>
+		<div css={panel(dir)} {...divProps}>
 			{children.map((child: React.ReactElement<ConviSplitPanelItemProp>, index: number) => (
 				<>
 					<ConviSplitPanelItem
@@ -144,15 +145,11 @@ export const ConviSplitPanel: React.FC<ConviSplitPanelProp> = (props: ConviSplit
 						{child.props.children}
 					</ConviSplitPanelItem>
 					{index !== children.length - 1 && (
-						<ConviSplitPanelResizerStyle
-							dir={dir}
-							resizerThickness={resizerThickness}
-							onMouseDown={e => handleMouseDown(e, index + 1)}
-						/>
+						<div css={resizerStyle(dir, resizerThickness)} onMouseDown={e => handleMouseDown(e, index + 1)} />
 					)}
 				</>
 			))}
-		</ConviSplitPanelStyle>
+		</div>
 	);
 };
 

@@ -1,35 +1,32 @@
-import styled from '@emotion/styled';
+import { css } from '@emotion/react';
+import { theme } from './global/theme';
 
-export const ConviSplitPanelStyle = styled.div<{ dir: 'col' | 'row' }>`
+export type SplitDirection = 'col' | 'row';
+
+export const panel = (dir: SplitDirection) => css`
 	display: flex;
 	outline: none;
 	overflow: hidden;
 	user-select: text;
 	flex: 1;
-	flex-direction: ${props => (props.dir === 'col' ? 'column' : 'row')};
+	flex-direction: ${dir === 'col' ? 'column' : 'row'};
 	height: 100%;
 	width: 100%;
 `;
 
-export const ConviSplitPanelItemStyle = styled.div<{
-	size?: number;
-	minSize: number;
-	maxSize: number;
-	isGrow: boolean;
-	dir: 'col' | 'row';
-}>`
-	height: ${props => props.dir === 'col' && props.size && `${props.size}px`};
-	width: ${props => props.dir === 'row' && props.size && `${props.size}px`};
-	max-height: ${props => (props.dir === 'col' && props.maxSize === Infinity ? 'none' : `${props.maxSize}px`)};
-	max-width: ${props => (props.dir === 'row' && props.maxSize === Infinity ? 'none' : `${props.maxSize}px`)};
-	min-height: ${props => props.dir === 'col' && `${props.minSize}px`};
-	min-width: ${props => props.dir === 'row' && `${props.minSize}px`};
-	flex-grow: ${props => (props.isGrow ? 1 : 0)};
+export const panelItem = (dir: SplitDirection, isGrow: boolean, minSize: number, maxSize: number, size?: number) => css`
+	height: ${dir === 'col' && size && `${size}px`};
+	width: ${dir === 'row' && size && `${size}px`};
+	max-height: ${dir === 'col' && maxSize === Infinity ? 'none' : `${maxSize}px`};
+	max-width: ${dir === 'row' && maxSize === Infinity ? 'none' : `${maxSize}px`};
+	min-height: ${dir === 'col' && `${minSize}px`};
+	min-width: ${dir === 'row' && `${minSize}px`};
+	flex-grow: ${isGrow ? 1 : 0};
 `;
 
-export const ConviSplitPanelResizerStyle = styled.div<{ dir: 'col' | 'row'; resizerThickness: number }>`
-	background-color: gray;
-	width: ${props => props.dir !== 'col' && `${props.resizerThickness}px`};
-	height: ${props => props.dir === 'col' && `${props.resizerThickness}px`};
-	cursor: ${props => (props.dir === 'col' ? 'ns-resize' : 'ew-resize')};
+export const resizer = (dir: SplitDirection, thickness: number) => css`
+	background-color: ${theme.colors['gray-500']};
+	width: ${dir !== 'col' && `${thickness}px`};
+	height: ${dir === 'col' && `${thickness}px`};
+	cursor: ${dir === 'col' ? 'ns-resize' : 'ew-resize'};
 `;

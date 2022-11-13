@@ -1,5 +1,6 @@
+/** @jsxImportSource @emotion/react */
 import React, { forwardRef } from 'react';
-import { ConviSplitPanelItemStyle } from '../../style/ConviSplitPanelStyle';
+import { panelItem } from '../../style/ConviSplitPanelStyle';
 
 export interface ConviSplitPanelItemProp {
 	children: React.ReactNode;
@@ -20,9 +21,9 @@ export const ConviSplitPanelItem = forwardRef<React.ReactElement<ConviSplitPanel
 		const itemSize = size !== undefined ? size : initialSize; // size가 0일 수도 있음.
 
 		return (
-			<ConviSplitPanelItemStyle ref={ref} isGrow={isGrow} dir={dir} size={itemSize} maxSize={maxSize} minSize={minSize}>
+			<div css={panelItem(dir, isGrow, minSize, maxSize, itemSize)} ref={ref}>
 				{children}
-			</ConviSplitPanelItemStyle>
+			</div>
 		);
 	}
 );
