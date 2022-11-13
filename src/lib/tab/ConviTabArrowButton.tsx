@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { AiOutlineCaretLeft, AiOutlineCaretRight } from 'react-icons/ai';
+import { theme } from '../../style/global/theme';
 
 const LeftButton = styled(AiOutlineCaretLeft)<{ scrollLocation: number }>`
 	width: 20px;
-	background-color: #eeeeee;
+	background-color: ${theme.colors.secondary};
 	height: 25px;
 	display: inline-block;
 	filter: none;
@@ -15,13 +16,13 @@ const LeftButton = styled(AiOutlineCaretLeft)<{ scrollLocation: number }>`
 	left: ${props => `${props.scrollLocation}px`};
 	cursor: pointer;
 	:hover {
-		background-color: #87cefa;
+		background-color: ${theme.colors['primary-hover']};
 	}
 `;
 
 const RightButton = styled(AiOutlineCaretRight)<{ scrollLocation: number }>`
 	width: 20px;
-	background-color: #eeeeee;
+	background-color: ${theme.colors.secondary};
 	height: 25px;
 	display: inline-block;
 	filter: none;
@@ -32,7 +33,7 @@ const RightButton = styled(AiOutlineCaretRight)<{ scrollLocation: number }>`
 	right: ${props => `${props.scrollLocation}px`};
 	cursor: pointer;
 	:hover {
-		background-color: #87cefa;
+		background-color: ${theme.colors['primary-hover']};
 	}
 `;
 

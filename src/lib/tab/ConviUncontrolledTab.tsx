@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { ConviTabHeaderElement } from './ConviTabHeaderElement';
 import { ConviTabElementProps } from './ConviTabElement';
-import { selectedStyle, tabHeader, tabHeaderElement, tabList } from '../../style/ConviTabStyle';
+import { selectedStyle, tabHeaderStyle, tabListStyle } from '../../style/ConviTabStyle';
 
 // Type
 export interface ConviUncontrolledTabProps {
@@ -19,8 +19,8 @@ export const ConviUncontrolledTab: React.FC<ConviUncontrolledTabProps> = props =
 
 	return (
 		<div>
-			<div css={tabHeader}>
-				<div css={tabList}>
+			<div css={tabHeaderStyle}>
+				<div css={tabListStyle}>
 					{tabElements.map((child: React.ReactElement<ConviTabElementProps>, tabIndex: number) => (
 						<ConviTabHeaderElement
 							key={`${child.props.title}-${tabIndex * 1}`}

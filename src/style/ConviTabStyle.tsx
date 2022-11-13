@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
 import { theme } from './global/theme';
 
-export const tabHeader = css`
+export const tabHeaderStyle = css`
 	display: flex;
 	height: 25px;
 `;
 
-export const tabList = css`
+export const tabListStyle = css`
 	display: flex;
 	text-align: left;
 	background-color: ${theme.colors['gray-300']};
@@ -18,7 +18,7 @@ export const tabList = css`
 	scroll-behavior: smooth;
 `;
 
-export const tabHeaderElement = (selected: boolean) => css`
+export const tabHeaderElementStyle = (selected: boolean) => css`
 	display: flex;
 	height: '100%';
 	margin-top: auto;

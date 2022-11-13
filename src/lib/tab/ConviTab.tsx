@@ -4,7 +4,7 @@ import { ConviTabHeaderElement } from './ConviTabHeaderElement';
 import { ConviTabElement, ConviTabElementProps } from './ConviTabElement';
 import { getPadding, swapArrayElement } from '../../utils/Util';
 import { ConviTabPlusButton } from './ConviTabPlusButton';
-import { selectedStyle, tabHeader, tabList } from '../../style/ConviTabStyle';
+import { selectedStyle, tabHeaderStyle, tabListStyle } from '../../style/ConviTabStyle';
 import { ConviTabScrollButton } from './ConviTabScrollButton';
 
 // Type
@@ -170,8 +170,8 @@ export const ConviTab: React.FC<ConviTabProps> = props => {
 
 	return (
 		<div>
-			<div css={tabHeader}>
-				<div css={tabList} ref={headerRef} onScroll={e => setScrollLocation(e.currentTarget.scrollLeft)}>
+			<div css={tabHeaderStyle}>
+				<div css={tabListStyle} ref={headerRef} onScroll={e => setScrollLocation(e.currentTarget.scrollLeft)}>
 					{renderScrollButton(open)}
 					{children.map((child: React.ReactElement<ConviTabElementProps>, tabIndex: number) => (
 						<ConviTabHeaderElement

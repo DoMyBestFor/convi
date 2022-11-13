@@ -3,7 +3,7 @@ import { theme } from './global/theme';
 
 export type SplitDirection = 'col' | 'row';
 
-export const panel = (dir: SplitDirection) => css`
+export const panelStyle = (dir: SplitDirection) => css`
 	display: flex;
 	outline: none;
 	overflow: hidden;
@@ -14,7 +14,13 @@ export const panel = (dir: SplitDirection) => css`
 	width: 100%;
 `;
 
-export const panelItem = (dir: SplitDirection, isGrow: boolean, minSize: number, maxSize: number, size?: number) => css`
+export const panelItemStyle = (
+	dir: SplitDirection,
+	isGrow: boolean,
+	minSize: number,
+	maxSize: number,
+	size?: number
+) => css`
 	height: ${dir === 'col' && size && `${size}px`};
 	width: ${dir === 'row' && size && `${size}px`};
 	max-height: ${dir === 'col' && maxSize === Infinity ? 'none' : `${maxSize}px`};
@@ -24,7 +30,7 @@ export const panelItem = (dir: SplitDirection, isGrow: boolean, minSize: number,
 	flex-grow: ${isGrow ? 1 : 0};
 `;
 
-export const resizer = (dir: SplitDirection, thickness: number) => css`
+export const resizerStyle = (dir: SplitDirection, thickness: number) => css`
 	background-color: ${theme.colors['gray-500']};
 	width: ${dir !== 'col' && `${thickness}px`};
 	height: ${dir === 'col' && `${thickness}px`};

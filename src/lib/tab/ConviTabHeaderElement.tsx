@@ -3,7 +3,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /** @jsxImportSource @emotion/react */
 import React, { forwardRef, useEffect, useState } from 'react';
-import { editStyle, iconStyle, nonEditStyle, tabHeaderElement } from '../../style/ConviTabStyle';
+import { editStyle, iconStyle, nonEditStyle, tabHeaderElementStyle } from '../../style/ConviTabStyle';
 import { ConviTabCloseButton } from './ConviTabCloseButton';
 
 // Types
@@ -89,7 +89,7 @@ export const ConviTabHeaderElement = forwardRef<
 
 	return (
 		<span
-			css={tabHeaderElement(selected)}
+			css={tabHeaderElementStyle(selected)}
 			ref={ref}
 			draggable={draggableTab}
 			onDrag={e => onHeaderDrag(e)}

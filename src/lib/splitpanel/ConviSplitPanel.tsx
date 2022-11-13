@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { HTMLAttributes, useEffect, useRef, useState } from 'react';
-import { panel, resizer as resizerStyle } from '../../style/ConviSplitPanelStyle';
+import { panelStyle, resizerStyle } from '../../style/ConviSplitPanelStyle';
 
 import { ConviSplitPanelItem, ConviSplitPanelItemProp } from './ConviSplitPanelItem';
 
@@ -128,7 +128,7 @@ export const ConviSplitPanel: React.FC<ConviSplitPanelProp> = (props: ConviSplit
 
 	return (
 		// eslint-disable-next-line react/jsx-props-no-spreading
-		<div css={panel(dir)} {...divProps}>
+		<div css={panelStyle(dir)} {...divProps}>
 			{children.map((child: React.ReactElement<ConviSplitPanelItemProp>, index: number) => (
 				<>
 					<ConviSplitPanelItem
