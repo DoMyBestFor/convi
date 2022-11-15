@@ -4,11 +4,6 @@ import { panelStyle, resizerStyle } from '../../style/ConviSplitPanelStyle';
 
 import { ConviSplitPanelItem, ConviSplitPanelItemProp } from './ConviSplitPanelItem';
 
-// TODO
-// 1. hover 상태 css 추가
-// 2. min / max size 설정 추가
-// 3. init size / ratio 설정 추가
-
 export interface ConviSplitPanelProp extends HTMLAttributes<HTMLDivElement> {
 	/**
 	 * Splited Components ( >= 2)
