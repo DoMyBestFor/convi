@@ -52,3 +52,60 @@ export const nonEditStyle = css`
 	overflow: hidden;
 	white-space: nowrap;
 `;
+
+export const leftButtonStyle = (scrollLocation: number) => css`
+	width: 20px;
+	background-color: ${theme.colors.secondary};
+	height: 25px;
+	display: inline-block;
+	filter: none;
+	position: absolute;
+	justify-content: center;
+	text-align: center;
+	z-index: 500;
+	left: ${scrollLocation}px;
+	cursor: pointer;
+	:hover {
+		background-color: ${theme.colors['primary-hover']};
+	}
+`;
+
+export const rightButtonStyle = (scrollLocation: number) => css`
+	width: 20px;
+	background-color: ${theme.colors.secondary};
+	height: 25px;
+	display: inline-block;
+	filter: none;
+	position: absolute;
+	justify-content: center;
+	text-align: center;
+	z-index: 500;
+	right: ${scrollLocation}px;
+	cursor: pointer;
+	:hover {
+		background-color: ${theme.colors['primary-hover']};
+	}
+`;
+
+export const plusButtonStyle = css`
+	width: 20px;
+	height: 100%;
+	text-align: center;
+	justify-content: center;
+	background-color: ${theme.colors.secondary};
+	cursor: pointer;
+	:hover {
+		font-weight: bold;
+		color: ${theme.colors['gray-500']};
+	}
+`;
+
+export const closeButtonStyle = (displayCloseBtn: boolean) => css`
+	margin-left: auto;
+	margin-bottom: auto;
+	margin-top: auto;
+	:hover {
+		color: ${theme.colors.error};
+	}
+	visibility: ${displayCloseBtn ? 'visible' : 'hidden'};
+`;

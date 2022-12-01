@@ -1,10 +1,10 @@
 /** @jsxImportSource @emotion/react */
+import { AiOutlinePlus } from 'react-icons/ai';
 import React, { useEffect, useRef, useState } from 'react';
 import { ConviTabHeaderElement } from './ConviTabHeaderElement';
 import { ConviTabElement, ConviTabElementProps } from './ConviTabElement';
 import { getPadding, swapArrayElement } from '../../utils/Util';
-import { ConviTabPlusButton } from './ConviTabPlusButton';
-import { selectedStyle, tabHeaderStyle, tabListStyle } from '../../style/ConviTabStyle';
+import { plusButtonStyle, selectedStyle, tabHeaderStyle, tabListStyle } from '../../style/ConviTabStyle';
 import { ConviTabScrollButton } from './ConviTabScrollButton';
 
 // Type
@@ -158,7 +158,8 @@ export const ConviTab: React.FC<ConviTabProps> = props => {
 	const renderAddButton = (showAddButton: boolean) =>
 		showAddButton && (
 			<span>
-				<ConviTabPlusButton
+				<AiOutlinePlus
+					css={plusButtonStyle}
 					onClick={() => {
 						// assertion 사용 근거 : showAddButton이 onAdd !== undefined로만 넘겨줄 것이기 때문.
 						onAdd!();

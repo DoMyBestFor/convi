@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/mouse-events-have-key-events */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /** @jsxImportSource @emotion/react */
-import React, { forwardRef, useEffect, useState } from 'react';
-import { editStyle, iconStyle, nonEditStyle, tabHeaderElementStyle } from '../../style/ConviTabStyle';
-import { ConviTabCloseButton } from './ConviTabCloseButton';
+import { AiOutlineClose } from 'react-icons/ai';
+import React, { forwardRef, useState } from 'react';
+import { useTabTitles } from '../../hooks/hooks';
+import { closeButtonStyle, iconStyle, tabHeaderElementStyle } from '../../style/ConviTabStyle';
 
 // Types
 export interface ConviTabHeaderElementProps {
@@ -21,44 +21,6 @@ export interface ConviTabHeaderElementProps {
 	onSelected: (index: number) => void;
 	onClose: () => void;
 }
-
-// Custom Hooks
-const useTabTitles = (title: string, onTabTitleChange: (newTitle: string) => void, ableChangeTitle: boolean) => {
-	const [editMode, setEditMode] = useState<boolean>(false);
-	const [tabTitle, setTabTitle] = useState<string>(title);
-
-	useEffect(() => {
-		setTabTitle(title);
-	}, [title]);
-
-	const handleDoubleClick = () => setEditMode(true);
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => setTabTitle(e.target.value);
-
-	return {
-		titleContent: () =>
-			editMode && ableChangeTitle ? (
-				<input
-					css={editStyle}
-					value={tabTitle}
-					onChange={handleChange}
-					onBlur={e => {
-						onTabTitleChange(e.target.value);
-						setEditMode(false);
-					}}
-					onKeyDown={e => {
-						if (e.key === 'Enter') {
-							onTabTitleChange(e.currentTarget.value);
-							setEditMode(false);
-						}
-					}}
-				/>
-			) : (
-				<span css={nonEditStyle} onDoubleClick={handleDoubleClick}>
-					{tabTitle}
-				</span>
-			),
-	};
-};
 
 export const ConviTabHeaderElement = forwardRef<
 	React.ReactElement<ConviTabHeaderElementProps>,
@@ -95,12 +57,12 @@ export const ConviTabHeaderElement = forwardRef<
 			onDrag={e => onHeaderDrag(e)}
 			onDragEnd={e => onHeaderDragEnd(e)}
 			onClick={handleClick}
-			onMouseOver={handleMouseOver}
-			onMouseOut={handleMouseOut}
+			onMouseEnter={handleMouseOver}
+			onMouseLeave={handleMouseOut}
 		>
 			<span css={iconStyle}>{icon}</span>
 			{titleContent()}
-			{fixed || <ConviTabCloseButton displayCloseBtn={displayCloseButton} onClick={handleClose} />}
+			{fixed || <AiOutlineClose css={closeButtonStyle(displayCloseButton)} onClick={handleClose} />}
 		</span>
 	);
 });

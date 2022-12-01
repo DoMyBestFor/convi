@@ -1,7 +1,13 @@
 /** @jsxImportSource @emotion/react */
+import { AiOutlineClose } from 'react-icons/ai';
 import React, { HTMLAttributes, ReactNode } from 'react';
-import { ConviModalCloseButton } from './ConviModalCloseButton';
-import { modalBackdropStyle, modalContentStyle, modalStyle, modalTitleStyle } from '../../style/ConviModalStyle';
+import {
+	modalBackdropStyle,
+	modalCloseButtonStyle,
+	modalContentStyle,
+	modalStyle,
+	modalTitleStyle,
+} from '../../style/ConviModalStyle';
 
 export interface ConviModalProps extends HTMLAttributes<HTMLDivElement> {
 	/**
@@ -43,7 +49,7 @@ export const ConviModal: React.FC<ConviModalProps> = props => {
 				<div css={modalContentStyle} {...divProps}>
 					<div css={modalTitleStyle}>
 						{modalTitle}
-						<ConviModalCloseButton onClick={() => onClose()} />
+						<AiOutlineClose css={modalCloseButtonStyle} />
 					</div>
 					{children}
 				</div>

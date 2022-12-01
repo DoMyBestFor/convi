@@ -46,3 +46,13 @@ export const modalContentStyle = css`
 	min-height: 30%;
 	overflow: auto;
 `;
+
+export const modalCloseButtonStyle = css`
+	margin-left: auto;
+	margin-top: auto;
+	margin-bottom: auto;
+	cursor: pointer;
+	:hover {
+		color: ${theme.colors.error};
+	}
+`;
