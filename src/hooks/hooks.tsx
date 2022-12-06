@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { editStyle, nonEditStyle } from '../style/ConviTabStyle';
 
 export const useTabTitles = (title: string, onTabTitleChange: (newTitle: string) => void, ableChangeTitle: boolean) => {
 	const [editMode, setEditMode] = useState<boolean>(false);
