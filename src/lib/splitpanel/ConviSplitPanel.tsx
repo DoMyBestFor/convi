@@ -140,7 +140,11 @@ export const ConviSplitPanel: React.FC<ConviSplitPanelProp> = (props: ConviSplit
 						{child.props.children}
 					</ConviSplitPanelItem>
 					{index !== children.length - 1 && (
-						<div css={resizerStyle(dir, resizerThickness)} onMouseDown={e => handleMouseDown(e, index + 1)} />
+						<div
+							role="presentation"
+							css={resizerStyle(dir, resizerThickness)}
+							onMouseDown={e => handleMouseDown(e, index + 1)}
+						/>
 					)}
 				</>
 			))}
