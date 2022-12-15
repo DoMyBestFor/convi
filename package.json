@@ -30,6 +30,8 @@
     "url": "https://github.com/DoMyBestFor/convi"
   },
   "dependencies": {
+    "react-icons": "^4.6.0",
+    "@emotion/react": "^11.10.4",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
@@ -77,8 +79,6 @@
     "@storybook/addon-links": "^6.5.13",
     "typescript": "^4.8.2",
     "@babel/core": "^7.19.6",
-    "@emotion/react": "^11.10.4",
-    "@emotion/styled": "^11.10.4",
     "@storybook/addon-actions": "^6.5.13",
     "@storybook/builder-webpack5": "^6.5.13",
     "@storybook/manager-webpack5": "^6.5.13",
@@ -99,8 +99,7 @@
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "eslint-plugin-storybook": "^0.6.6",
     "postcss": "^8.4.14",
-    "prettier": "^2.7.1",
-    "react-icons": "^4.6.0"
+    "prettier": "^2.7.1"
   },
   "jest": {
     "roots": [
