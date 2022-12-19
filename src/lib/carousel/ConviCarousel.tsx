@@ -9,7 +9,7 @@ export interface ConviCarouselProps {
 }
 
 // todo
-// useref 써서 scrollTo 만들기
+// useref 써서 scrollTo 만들기, ui 적용
 export const ConviCarousel: React.FC<ConviCarouselProps> = props => {
 	const { children, width = '100%', height = '100%' } = props;
 	const [current, setCurrent] = useState<number>(0);

@@ -4,6 +4,10 @@ import { panelStyle, resizerStyle } from '../../style/ConviSplitPanelStyle';
 
 import { ConviSplitPanelItem, ConviSplitPanelItemProp } from './ConviSplitPanelItem';
 
+/**
+ * initialRatio, flex-grow 적용
+ */
+
 export interface ConviSplitPanelProp extends HTMLAttributes<HTMLDivElement> {
 	/**
 	 * Splited Components ( >= 2)

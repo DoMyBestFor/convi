@@ -7,6 +7,12 @@ import { getPadding, swapArrayElement } from '../../utils/Util';
 import { plusButtonStyle, selectedStyle, tabHeaderStyle, tabListStyle } from '../../style/ConviTabStyle';
 import { ConviTabScrollButton } from './ConviTabScrollButton';
 
+/**
+ * tooltip
+ * show title
+ * onTabPositionChanged 뭔가 아쉬움
+ */
+
 // Type
 export interface ConviTabProps {
 	/**

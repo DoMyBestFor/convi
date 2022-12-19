@@ -9,6 +9,9 @@ import {
 	modalTitleStyle,
 } from '../../style/ConviModalStyle';
 
+/**
+ * animation 적용 fade-out
+ */
 export interface ConviModalProps extends HTMLAttributes<HTMLDivElement> {
 	/**
 	 * modal open state
