@@ -11,6 +11,7 @@ import { ConviTabScrollButton } from './ConviTabScrollButton';
  * tooltip
  * show title
  * onTabPositionChanged 뭔가 아쉬움
+ * carousel 참고
  */
 
 // Type
